@@ -18,11 +18,8 @@ class CreateCategoryproductsTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->string('images');
-            // $table->date('delete_date');
-            // $table->timestamps();
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
-            // $table->integer('user_id');
         });
     }
 

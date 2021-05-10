@@ -16,19 +16,14 @@ class CreateOrdersTable extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->increments('id');
-            // $table->json('product_id');
-            // $table->timestamps();
+            $table->unsignedInteger('user_id');
+            $table->tinyInteger('is_pay')->default(0);
             $table->string('full_name');
-            $table->string('phone');
-            // $table->string('address');
             $table->string('email');
-            $table->string('address_order');
-            $table->integer('is_pay')->default(0);
-            // $table->integer('user_id');
+            $table->string('phone');
+            $table->string('address');
             $table->integer('total');
-            $table->unsignedInteger('payment_method_id');
-            $table->unsignedInteger('vouchers_id');
-            $table->unsignedInteger('statusorder_id');
+            $table->unsignedInteger('status_order_id');
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
         });

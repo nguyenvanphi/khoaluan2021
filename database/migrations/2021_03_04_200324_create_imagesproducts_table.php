@@ -16,12 +16,8 @@ class CreateImagesproductsTable extends Migration
     {
         Schema::create('imagesproducts', function (Blueprint $table) {
             $table->increments('id');
-            // $table->string('name');
-            $table->string('images');
             $table->unsignedInteger('product_id');
-            // $table->date('delete_date');
-            // $table->timestamps();
-            // $table->integer('user_id');
+            $table->string('images');
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
         });

@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Support\Facades\DB;
 
 class CreateStatusordersTable extends Migration
 {
@@ -15,8 +16,8 @@ class CreateStatusordersTable extends Migration
     {
         Schema::create('statusorders', function (Blueprint $table) {
             $table->increments('id');
-            // $table->timestamps();
             $table->string('name');
+            $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
         });
     }
 

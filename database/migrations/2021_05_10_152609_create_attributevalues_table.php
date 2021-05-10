@@ -5,7 +5,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Support\Facades\DB;
 
-class CreateOrderdetailsTable extends Migration
+class CreateAttributevaluesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,11 +14,11 @@ class CreateOrderdetailsTable extends Migration
      */
     public function up()
     {
-        Schema::create('orderdetails', function (Blueprint $table) {
+        Schema::create('attributevalues', function (Blueprint $table) {
             $table->increments('id');
+            $table->unsignedInteger('attribute_id');
             $table->unsignedInteger('product_id');
-            $table->unsignedInteger('order_id');
-            $table->integer('qty');
+            $table->string('value');
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
         });
@@ -31,6 +31,6 @@ class CreateOrderdetailsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('orderdetails');
+        Schema::dropIfExists('attributevalues');
     }
 }
