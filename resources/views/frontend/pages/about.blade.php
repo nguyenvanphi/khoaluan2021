@@ -36,7 +36,7 @@
 
                     <div class="col-lg-6 order-0">
                         <div class="about-thumb mb-sm-30">
-                            <img src="{{('public/frontend/images/banner/a-1.jpg')}}" alt="About" />
+                            <img src="{{('public/frontend/images/thoi-trang-nam_s11559.jpg')}}" alt="About" />
                         </div>
                     </div>
                 </div>
@@ -44,8 +44,7 @@
                 <div class="row align-items-center sm-top">
                     <div class="col-lg-6">
                         <div class="about-thumb video-play mb-sm-30">
-                            <img src="{{('public/frontend/images/banner/a-2.jpg')}}" alt="About" />
-                            <a href="https://www.youtube.com/watch?=17&v=S-UcVwzrAqo" class="btn-video-popup"><i class="ion-play"></i></a>
+                            <img src="{{('public/frontend/images/thoitrangnam.jpg')}}" alt="About" />
                         </div>
                     </div>
 
@@ -69,7 +68,7 @@
                     <div class="col-12 text-center">
                         <div class="call-to-action-txt">
                             <h2>TẤT CẢ CÁC SẢN PHẨM <br> BẠN CÓ THỂ TÌM HIỂU TẠI ĐÂY</h2>
-                                <a href="shop.html" class="btn btn-brand">Mua Ngay</a>
+                                <a href="{{URL::to('/shop')}}" class="btn btn-brand">Mua Ngay</a>
                         </div>
                     </div>
                 </div>

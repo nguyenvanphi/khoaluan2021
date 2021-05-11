@@ -120,19 +120,19 @@
                                 </div>
                             </div>
                         <?php } ?>
-                        <div class="mini-cart-wrap">
-                            <a href="{{URL::to('/cart')}}" class="btn-mini-cart">
+                        {{-- <div class="mini-cart-wrap">
+                            <a href="{{URL::to('/cart')}}" class="btn-mini-cart"> --}}
                                 {{-- <i class="fa fa-bell" style="font-size: 1.5rem;"></i> --}}
-                                <img src="{{('public/frontend/images/icons/iconfinder_icon-ios7-bell-outline_211693.png')}}" style="width: 2rem"/>
+                                {{-- <img src="{{('public/frontend/images/icons/iconfinder_icon-ios7-bell-outline_211693.png')}}" style="width: 2rem"/>
                                 <span class="cart-total">3</span>
                             </a>
-                        </div>
+                        </div> --}}
                         <div class="mini-cart-wrap">
                             <a href="{{URL::to('/cart')}}" class="btn-mini-cart">
                                 <i class="ion-bag"></i>
-                                <span class="cart-total">3</span>
+                                <span class="cart-total">0</span>
                             </a>
-                            <div class="mini-cart-content">
+                            {{-- <div class="mini-cart-content">
                                 <div class="mini-cart-product">
                                     <div class="mini-product">
                                         <div class="mini-product__thumb">
@@ -176,7 +176,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div> --}}
                         </div>
 
                         <div class="responsive-menu d-lg-none">
