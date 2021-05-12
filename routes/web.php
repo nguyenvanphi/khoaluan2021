@@ -26,7 +26,7 @@ Route::middleware('CheckLogin')->group(function () {
     Route::get('/forgetpassword','PageController@forgetpassword');
 });
 
-Route::get('/','PageController@home');
+Route::get('/','HomeController@index');
 Route::get('/resetpassword','PageController@resetpassword');
 Route::get('/about','PageController@about');
 Route::get('/shop','PageController@shop');

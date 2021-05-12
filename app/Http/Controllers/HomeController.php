@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Products;
+use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
@@ -22,7 +24,13 @@ class HomeController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        return view('frontend.home');
+    {   
+        $data_sale = DB::table('products')
+                    ->where('sale','<>',null)
+                    ->get();
+        $data_hot = DB::table('products')
+                    ->where('is_hot','=','1')
+                    ->get();
+        return view('frontend.home',['products_sale'=>$data_sale,'products_hot'=>$data_hot]);
     }
 }
