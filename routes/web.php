@@ -19,26 +19,28 @@ Route User
 
 // use App\Models\Categoryproduct;
 
-Route::middleware('CheckLogin')->group(function () {
-    Route::get('/login','PageController@login');
-    Route::post('login', 'AuthController@login')->name('login');
-    Route::get('/register','PageController@register');
-    Route::get('/forgetpassword','PageController@forgetpassword');
-});
+// Route::middleware('CheckLogin')->group(function () {
+//     Route::get('/login','PageController@login');
+//     Route::post('login', 'AuthController@login')->name('login');
+//     Route::get('/register','PageController@register');
+//     Route::get('/forgetpassword','PageController@forgetpassword');
+// });
 
 Route::get('/','HomeController@index');
-Route::get('/resetpassword','PageController@resetpassword');
+// Route::get('/resetpassword','PageController@resetpassword');
 Route::get('/about','PageController@about');
 Route::get('/shop','ShopController@index');
 Route::get('/contact','PageController@contact');
 Route::get('/cart','PageController@cart');
-Route::get('/checkout', 'PageController@checkout');
 Route::get('/singleproduct', 'PageController@singleproduct');
-Route::get('/history-orders', 'PageController@history');
-Route::get('/profile', 'PageController@profile');
+Route::get('/search-product','ShopController@index');
 
-Route::get('logout', 'AuthController@logout');
-
+Route::middleware('auth')->group(function () {
+    Route::get('logout', 'AuthController@logout');
+    Route::get('/history-orders', 'PageController@history');
+    Route::get('/profile', 'PageController@profile');
+    Route::get('/checkout', 'PageController@checkout');
+});
 Route::middleware('CheckLoginAdmin')->group(function () {
     
     Route::get('/dashboard', 'PageController@dashboard');

@@ -29,7 +29,7 @@
                     </button>
 
                     <!-- Branding Image -->
-                    <a class="navbar-brand" href="{{ url('/') }}">
+                    <a class="navbar-brand" href="{{URL::to('/')}}">
                         THE GMEN
                         {{-- {{ config('app.name', 'The GMen') }} --}}
                     </a>

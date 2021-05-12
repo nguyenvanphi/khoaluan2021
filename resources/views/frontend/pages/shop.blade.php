@@ -1,6 +1,14 @@
 @extends('frontend.layout.shared')
 @section('content')
-
+<style>
+    .product-item .product-item__content .btn{
+        border: unset;
+        border-radius: unset !important;
+        height: unset;
+        font-weight: unset;
+        padding: 0 15px; 
+    }
+</style>
     <!--== Start Page Header Area ==-->
     <div class="page-header-wrap bg-img" data-bg="{{('public/frontend/images/bg/shop.jpg')}}">
         <div class="container">
@@ -43,9 +51,10 @@
                                 box-shadow: unset;
                             }
                         </style>
-                        <form class="search-form" style="max-width: 300px; height: 40px;">
-                            <input class="form-control mr-sm-2" type="text" placeholder="Tìm kiếm sản phẩm" aria-label="Search" style="border-radius: unset;">
-                            <button class="search-trigger" style="position: absolute;top: 7px;left: 50%;"><i class="fa fa-search"></i></button>
+                        <form action="{{URL::to('/search-product')}}" method="GET" class="search-form" style="max-width: 300px; height: 40px;">
+                            {{ csrf_field() }}
+                            <input class="form-control mr-sm-2" type="text" name="search_product" placeholder="Tìm kiếm sản phẩm" value="<?php if(!empty($search)) echo $search; ?>" aria-label="Search" style="border-radius: unset;">
+                            <button type="submit" class="search-trigger" style="position: absolute;top: 7px;left: 50%;"><i class="fa fa-search"></i></button>
                         </form>
                     </div>
                     {{-- <div class="col-sm-6">
@@ -108,14 +117,16 @@
                                                     echo $product->price
                                                 @endphp VNĐ</span>
                                             @endif
+                                            <br>
+                                            <a href="{{URL::to('/singleproduct')}}" type="button" class="btn btn-secondary">Chọn ngay</a>
                                         </div>
             
-                                        <div class="product-item__action" style="padding-top: 10px;padding-left: 10px;">
-                                            <button class="btn-add-to-cart"><i class="ion-bag"></i></button>
+                                        {{-- <div class="product-item__action" style="padding-top: 10px;padding-left: 10px;">
+                                            <button class="btn-add-to-cart"><i class="ion-bag"></i></button> --}}
                                             {{-- <button class="btn-add-to-cart"><i class="ion-ios-loop-strong"></i></button>
                                             <button class="btn-add-to-cart"><i class="ion-ios-heart-outline"></i></button> --}}
-                                            <button class="btn-add-to-cart"><i class="ion-eye"></i></button>
-                                        </div>
+                                            {{-- <button class="btn-add-to-cart"><i class="ion-eye"></i></button>
+                                        </div> --}}
                                     </div>
             
                                     {{-- <div class="product-item__sale">

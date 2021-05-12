@@ -9,6 +9,13 @@
         .product-item .product-item__content .title{
             text-transform: uppercase;
         }
+        .product-item .product-item__content .btn{
+            border: unset;
+            border-radius: unset !important;
+            height: unset;
+            font-weight: unset;
+            padding: 0 15px; 
+        }
     </style>
     <!--== Start Slider Area Wrapper ==-->
     <div class="slider-area-wrapper home-2">
@@ -102,7 +109,10 @@
                                             @endphp" alt="Product" />
                                             </a>
                                         </div>
-
+                                        {{-- overflow: hidden;
+                                        -webkit-line-clamp: 1;
+                                        -webkit-box-orient: vertical;
+                                        display: -webkit-box; --}}
                                         <div class="product-item__content">
                                             <h4 class="title"><a href="single-product.html">@php
                                                 echo $item->name
@@ -112,14 +122,15 @@
                                             @endphp VNĐ<del> @php
                                                 echo $item->price
                                             @endphp VNĐ</del></span>
+                                            <a href="{{URL::to('/singleproduct')}}" type="button" class="btn btn-secondary">Chọn ngay</a>
                                         </div>
+                                        {{-- <div class="product-item__action">
 
-                                        <div class="product-item__action">
                                             <button class="btn-add-to-cart"><i class="ion-bag"></i></button>
                                         
                                             
                                             <a href="{{URL::to('/singleproduct')}}" class="btn-add-to-cart"><i class="ion-eye"></i></a>
-                                        </div>
+                                        </div> --}}
 
                                     </div>
                                     <!-- End Product Item -->
@@ -179,12 +190,14 @@
                                                     echo $item->price
                                                 @endphp VNĐ</span>
                                             @endif
+                                            <a href="{{URL::to('/singleproduct')}}" type="button" class="btn btn-secondary">Chọn ngay</a>
                                         </div>
 
-                                        <div class="product-item__action">
+                                        {{-- <div class="product-item__action">
                                             <button class="btn-add-to-cart"><i class="ion-bag"></i></button>
                                             <a href="{{URL::to('/singleproduct')}}" class="btn-add-to-cart"><i class="ion-eye"></i></a>
-                                        </div>
+                                            
+                                        </div> --}}
 
                                     </div>
                                 </div>
