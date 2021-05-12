@@ -29,7 +29,7 @@ Route::middleware('CheckLogin')->group(function () {
 Route::get('/','HomeController@index');
 Route::get('/resetpassword','PageController@resetpassword');
 Route::get('/about','PageController@about');
-Route::get('/shop','PageController@shop');
+Route::get('/shop','ShopController@index');
 Route::get('/contact','PageController@contact');
 Route::get('/cart','PageController@cart');
 Route::get('/checkout', 'PageController@checkout');
@@ -37,11 +37,7 @@ Route::get('/singleproduct', 'PageController@singleproduct');
 Route::get('/history-orders', 'PageController@history');
 Route::get('/profile', 'PageController@profile');
 
-
-
-
 Route::get('logout', 'AuthController@logout');
-
 
 Route::middleware('CheckLoginAdmin')->group(function () {
     
@@ -85,7 +81,6 @@ Route::middleware('CheckLoginAdmin')->group(function () {
     // info
     Route::get('/info', 'InfoController@index')->name('info');
 });
-
 
 Auth::routes();
 

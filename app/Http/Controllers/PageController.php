@@ -7,9 +7,6 @@ use Illuminate\Http\Request;
 class PageController extends Controller
 {
     // User
-    public function home(){
-        return view('frontend.home');
-    }
     public function login(){
         return view('frontend.pages.login');
     } 
@@ -24,9 +21,6 @@ class PageController extends Controller
     }
     public function about(){
         return view('frontend.pages.about');
-    } 
-    public function shop(){
-        return view('frontend.pages.shop');
     } 
 
     public function contact(){
