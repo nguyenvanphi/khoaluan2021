@@ -17,7 +17,9 @@ class DatabaseSeeder extends Seeder
         // DB::table('roles')->insert(['name'=>'admin']);
         $this->call(categoryproductsSeeder::class);
         $this->call(productsSeeder::class);
-        $this->call(usersSeeder::class);
+        $this->call(imagesproductsSeeder::class);
+        $this->call(attributesSeeder::class);
+        $this->call(attributevaluesSeeder::class);
     }
 }
 class rolesSeeder extends Seeder{
@@ -79,6 +81,88 @@ class usersSeeder extends Seeder{
         DB::table('users')->insert([
             ['id' => '1','user_name' => 'admin','email' => 'nguyenvanphi31@gmail.com','phone' => '0395745039','address'=> 'Huế, Việt Nam','password' => $password,'role_id' => '1'],
             ['id' => '2','user_name' => 'user','email' => '17T1021197@husc.edu.vn','phone' => '0395745039','address'=> 'Huế, Việt Nam','password' => $password,'role_id' => '2'],
+        ]);
+    }
+}
+class imagesproductsSeeder extends Seeder{
+    public function run()
+    {
+        DB::table('imagesproducts')->insert([
+            ['product_id' => '13','images' => '1620874510'],
+            ['product_id' => '13','images' => '1620874539'],
+            ['product_id' => '8','images' => '1620874570'],
+            ['product_id' => '2','images' => '1620874611'],
+            ['product_id' => '2','images' => '1620874641'],
+            ['product_id' => '3','images' => '1620874683'],
+            ['product_id' => '1','images' => '1620874742'],
+            ['product_id' => '1','images' => '1620874801'],
+        ]);
+    }
+}
+class attributesSeeder extends Seeder{
+    public function run()
+    {
+        DB::table('attributes')->insert([
+            ['name' => 'Size'],
+        ]);
+    }
+}
+class attributevaluesSeeder extends Seeder{
+    public function run()
+    {
+        DB::table('attributevalues')->insert([
+            ['attribute_id' => '1','product_id'=>'1','value'=>'S'],
+            ['attribute_id' => '1','product_id'=>'1','value'=>'M'],
+            ['attribute_id' => '1','product_id'=>'1','value'=>'L'],
+            ['attribute_id' => '1','product_id'=>'1','value'=>'XL'],
+            ['attribute_id' => '1','product_id'=>'2','value'=>'S'],
+            ['attribute_id' => '1','product_id'=>'2','value'=>'M'],
+            ['attribute_id' => '1','product_id'=>'2','value'=>'L'],
+            ['attribute_id' => '1','product_id'=>'2','value'=>'XL'],
+            ['attribute_id' => '1','product_id'=>'3','value'=>'S'],
+            ['attribute_id' => '1','product_id'=>'3','value'=>'M'],
+            ['attribute_id' => '1','product_id'=>'3','value'=>'L'],
+            ['attribute_id' => '1','product_id'=>'3','value'=>'XL'],
+            ['attribute_id' => '1','product_id'=>'4','value'=>'S'],
+            ['attribute_id' => '1','product_id'=>'4','value'=>'M'],
+            ['attribute_id' => '1','product_id'=>'4','value'=>'L'],
+            ['attribute_id' => '1','product_id'=>'4','value'=>'XL'],
+            ['attribute_id' => '1','product_id'=>'5','value'=>'S'],
+            ['attribute_id' => '1','product_id'=>'5','value'=>'M'],
+            ['attribute_id' => '1','product_id'=>'5','value'=>'L'],
+            ['attribute_id' => '1','product_id'=>'5','value'=>'XL'],
+            ['attribute_id' => '1','product_id'=>'6','value'=>'S'],
+            ['attribute_id' => '1','product_id'=>'6','value'=>'M'],
+            ['attribute_id' => '1','product_id'=>'6','value'=>'L'],
+            ['attribute_id' => '1','product_id'=>'6','value'=>'XL'],
+            ['attribute_id' => '1','product_id'=>'7','value'=>'S'],
+            ['attribute_id' => '1','product_id'=>'7','value'=>'M'],
+            ['attribute_id' => '1','product_id'=>'7','value'=>'L'],
+            ['attribute_id' => '1','product_id'=>'7','value'=>'XL'],
+            ['attribute_id' => '1','product_id'=>'8','value'=>'S'],
+            ['attribute_id' => '1','product_id'=>'8','value'=>'M'],
+            ['attribute_id' => '1','product_id'=>'8','value'=>'L'],
+            ['attribute_id' => '1','product_id'=>'8','value'=>'XL'],
+            ['attribute_id' => '1','product_id'=>'9','value'=>'S'],
+            ['attribute_id' => '1','product_id'=>'9','value'=>'M'],
+            ['attribute_id' => '1','product_id'=>'9','value'=>'L'],
+            ['attribute_id' => '1','product_id'=>'9','value'=>'XL'],
+            ['attribute_id' => '1','product_id'=>'10','value'=>'S'],
+            ['attribute_id' => '1','product_id'=>'10','value'=>'M'],
+            ['attribute_id' => '1','product_id'=>'10','value'=>'L'],
+            ['attribute_id' => '1','product_id'=>'10','value'=>'XL'],
+            ['attribute_id' => '1','product_id'=>'11','value'=>'S'],
+            ['attribute_id' => '1','product_id'=>'11','value'=>'M'],
+            ['attribute_id' => '1','product_id'=>'11','value'=>'L'],
+            ['attribute_id' => '1','product_id'=>'11','value'=>'XL'],
+            ['attribute_id' => '1','product_id'=>'12','value'=>'S'],
+            ['attribute_id' => '1','product_id'=>'12','value'=>'M'],
+            ['attribute_id' => '1','product_id'=>'12','value'=>'L'],
+            ['attribute_id' => '1','product_id'=>'12','value'=>'XL'],
+            ['attribute_id' => '1','product_id'=>'13','value'=>'S'],
+            ['attribute_id' => '1','product_id'=>'13','value'=>'M'],
+            ['attribute_id' => '1','product_id'=>'13','value'=>'L'],
+            ['attribute_id' => '1','product_id'=>'13','value'=>'XL'],
         ]);
     }
 }

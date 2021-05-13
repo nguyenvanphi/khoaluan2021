@@ -32,6 +32,7 @@ Route::get('/about','PageController@about');
 Route::get('/shop','ShopController@index');
 Route::get('/contact','PageController@contact');
 Route::get('/cart','PageController@cart');
+Route::get('/singleproduct/{id}', 'SingleproductController@index');
 Route::get('/singleproduct', 'PageController@singleproduct');
 Route::get('/search-product','ShopController@index');
 

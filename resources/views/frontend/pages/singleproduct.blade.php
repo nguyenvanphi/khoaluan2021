@@ -2,7 +2,7 @@
 @section('content')
 
     <!--== Start Page Header Area ==-->
-    <div class="page-header-wrap bg-img" data-bg="{{('public/frontend/images/bg/shop.jpg')}}">
+    <div class="page-header-wrap bg-img" data-bg="{{asset('public/frontend/images/bg/shop.jpg')}}">
         <div class="container">
             <div class="row">
                 <div class="col-12 text-center">
@@ -35,21 +35,24 @@
                                 <div class="product-thumb-area">
                                     <div class="product-details-thumbnail">
                                         <div class="product-thumbnail-slider" id="thumb-gallery">
-                                            <figure class="pro-thumb-item" data-mfp-src="{{('public/frontend/images/thegmen/1617940531014ervav4.jpg')}}">
-                                                <img src="{{('public/frontend/images/thegmen/1617940531014ervav4.jpg')}}" alt="Product Details" />
+                                            <figure class="pro-thumb-item" data-mfp-src="{{ URL::to('/') }}/public/storage/products/@php
+                                            echo $product->images
+                                        @endphp">
+                                                <img src="{{ URL::to('/') }}/public/storage/products/@php
+                                                echo $product->images
+                                            @endphp" alt="Product Details" style="max-height:468px; width: 100%"/>
                                             </figure>
-                                            <figure class="pro-thumb-item" data-mfp-src="{{('public/frontend/images/product/product-details-2.png')}}">
-                                                <img src="{{('public/frontend/images/product/product-details-2.png')}}" alt="Product Details" />
-                                            </figure>
-                                            <figure class="pro-thumb-item" data-mfp-src="{{('public/frontend/images/product/product-details-3.png')}}">
-                                                <img src="{{('public/frontend/images/product/product-details-3.png')}}" alt="Product Details" />
-                                            </figure>
-                                            <figure class="pro-thumb-item" data-mfp-src="{{('public/frontend/images/product/product-details-4.png')}}">
-                                                <img src="{{('public/frontend/images/product/product-details-4.png')}}" alt="Product Details" />
-                                            </figure>
-                                            <figure class="pro-thumb-item" data-mfp-src="{{('public/frontend/images/product/product-details-5.png')}}">
-                                                <img src="{{('public/frontend/images/product/product-details-5.png')}}" alt="Product Details" />
-                                            </figure>
+                                            @if (count($imagesproduct)!=0)
+                                                @foreach ($imagesproduct as $item)
+                                                    <figure class="pro-thumb-item" data-mfp-src="{{ URL::to('/') }}/public/storage/products/@php
+                                                    echo $item->images
+                                                @endphp">
+                                                        <img src="{{ URL::to('/') }}/public/storage/products/@php
+                                                        echo $item->images
+                                                    @endphp" alt="Product Details" style="max-height:468px; width: 100%"/>
+                                                    </figure>
+                                                @endforeach
+                                            @endif
                                         </div>
 
                                         <a href="#thumb-gallery" class="btn-large-view btn-gallery-popup">View Larger <i class="fa fa-search-plus"></i></a>
@@ -57,20 +60,19 @@
 
                                     <div class="product-details-thumbnail-nav">
                                         <figure class="pro-thumb-item">
-                                            <img src="{{('public/frontend/images/thegmen/1617940531014ervav4.jpg')}}" alt="Product Details" />
+                                            <img src="{{ URL::to('/') }}/public/storage/products/@php
+                                            echo $product->images
+                                            @endphp" style="width:100%;max-height:108px;" alt="Product Details" />
                                         </figure>
-                                        <figure class="pro-thumb-item">
-                                            <img src="{{('public/frontend/images/productdetail/1617940521349e2jawc.jpg')}}" style="width:100%;max-height:108px;" alt="Product Details" />
-                                        </figure>
-                                        <figure class="pro-thumb-item">
-                                            <img src="{{('public/frontend/images/productdetail/16179405889717d1tmq.jpg')}}" alt="Product Details" />
-                                        </figure>
-                                        <figure class="pro-thumb-item">
-                                            <img src="{{('public/frontend/images/productdetail/16179406024915ty919.jpg')}}" alt="Product Details" />
-                                        </figure>
-                                        <figure class="pro-thumb-item">
-                                            <img src="{{('public/frontend/images/productdetail/product-5.png')}}" alt="Product Details" />
-                                        </figure>
+                                        @if (count($imagesproduct)!=0)
+                                            @foreach ($imagesproduct as $item)
+                                                <figure class="pro-thumb-item">
+                                                    <img src="{{ URL::to('/') }}/public/storage/products/@php
+                                                    echo $item->images
+                                                @endphp" style="width:100%;max-height:108px;" alt="Product Details" />
+                                                </figure>
+                                            @endforeach
+                                        @endif
                                     </div>
                                 </div>
                             </div>
@@ -80,12 +82,27 @@
                             <div class="col-md-7">
                                 <div class="product-details-info-content-wrap">
                                     <div class="prod-details-info-content">
-                                        <h2>PIMA POLO SHIRT - COFFEE</h2>
-                                        <h5 class="price"><strong>Giá:</strong> <span class="price-amount">320000 VNĐ</span>
+                                        <h2>{{$product->name}}</h2>
+                                        <h5 class="price"><strong>Giá:</strong>
+                                            @if ($product->sale!=null)
+                                            <span class="price-amount"> @php
+                                                    echo $product->sale
+                                                @endphp VNĐ<br><del> @php
+                                                    echo $product->price
+                                                @endphp VNĐ</del></span>
+                                            @else
+                                            <span class="price-amount">@php
+                                                    echo $product->price
+                                                @endphp VNĐ</span>
+                                            @endif
                                         </h5>
-                                        <p>Chất liệu: Cotton Supima</p>
-                                        <p>- Chất vải siêu mịn, siêu nhẹ, siêu thoáng mát, chống nhăn tốt và không gây bết dính da.</p>
-                                        <p>- Thiết kế viền phối trẻ trung, năng động, buổi đi chơi của bạn sẽ trọn vẹn.</p>
+                                        @php
+                                            $product->description = str_replace( '<p>', '', $product->description );
+                                            $product->description = explode('</p>', $product->description);
+                                        @endphp
+                                        @foreach ($product->description as $description)
+                                                <p>{{$description}}</p>
+                                        @endforeach
                                         <div class="product-config">
                                             <div class="table-responsive">
                                                 <table class="table table-bordered">
@@ -152,7 +169,7 @@
                                                 <div class="display-ratings">
                                                     <div class="rating-item">
                                                         <div class="rating-author-pic">
-                                                            <img src="{{('public/frontend/images/extra/author-1.jpg')}}" alt="author" />
+                                                            <img src="{{asset('public/frontend/images/extra/author-1.jpg')}}" alt="author" />
                                                         </div>
 
                                                         <div class="rating-author-txt">
@@ -177,7 +194,7 @@
 
                                                     <div class="rating-item">
                                                         <div class="rating-author-pic">
-                                                            <img src="{{('public/frontend/images/extra/author-2.jpg')}}" alt="author" />
+                                                            <img src="{{asset('public/frontend/images/extra/author-2.jpg')}}" alt="author" />
                                                         </div>
 
                                                         <div class="rating-author-txt">
@@ -273,7 +290,7 @@
                                                 <div class="display-ratings">
                                                     <div class="rating-item">
                                                         <div class="rating-author-pic">
-                                                            <img src="{{('public/frontend/images/extra/author-1.jpg')}}" alt="author" />
+                                                            <img src="{{asset('public/frontend/images/extra/author-1.jpg')}}" alt="author" />
                                                         </div>
 
                                                         <div class="rating-author-txt">
@@ -298,7 +315,7 @@
 
                                                     <div class="rating-item">
                                                         <div class="rating-author-pic">
-                                                            <img src="{{('public/frontend/images/extra/author-2.jpg')}}" alt="author" />
+                                                            <img src="{{asset('public/frontend/images/extra/author-2.jpg')}}" alt="author" />
                                                         </div>
 
                                                         <div class="rating-author-txt">

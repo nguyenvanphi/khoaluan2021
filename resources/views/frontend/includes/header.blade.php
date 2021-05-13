@@ -9,35 +9,35 @@
     {{-- <title>@yield('title')</title> --}}
     <title>The GMEN</title>
     <!--== Favicon ==-->
-    <link rel="shortcut icon" href="{{('public/frontend/images/favicon2.ico')}}" type="image/x-icon" />
+    <link rel="shortcut icon" href="{{asset('public/frontend/images/favicon2.ico')}}" type="image/x-icon" />
 
     <!--== Google Fonts ==-->
     <link href="https://fonts.googleapis.com/css?family=Oswald:400,500,600,700%7CPoppins:400,400i,500,600&display=swap" rel="stylesheet">
 
     <!-- build:css public/frontend/css/app.min.css -->
     <!--== Leaflet Min CSS ==-->
-    <link href="{{('public/frontend/css/leaflet.min.css')}}" rel="stylesheet" />
+    <link href="{{asset('public/frontend/css/leaflet.min.css')}}" rel="stylesheet" />
     <!--== Nice Select Min CSS ==-->
-    <link href="{{('public/frontend/css/nice-select.min.css')}}" rel="stylesheet" />
+    <link href="{{asset('public/frontend/css/nice-select.min.css')}}" rel="stylesheet" />
     <!--== Slick Slider Min CSS ==-->
-    <link href="{{('public/frontend/css/slick.min.css')}}" rel="stylesheet" />
+    <link href="{{asset('public/frontend/css/slick.min.css')}}" rel="stylesheet" />
     <!--== Magnific Popup Min CSS ==-->
-    <link href="{{('public/frontend/css/magnific-popup.min.css')}}" rel="stylesheet" />
+    <link href="{{asset('public/frontend/css/magnific-popup.min.css')}}" rel="stylesheet" />
     <!--== Slicknav Min CSS ==-->
-    <link href="{{('public/frontend/css/slicknav.min.css')}}" rel="stylesheet" />
+    <link href="{{asset('public/frontend/css/slicknav.min.css')}}" rel="stylesheet" />
     <!--== Animate Min CSS ==-->
-    <link href="{{('public/frontend/css/animate.min.css')}}" rel="stylesheet" />
+    <link href="{{asset('public/frontend/css/animate.min.css')}}" rel="stylesheet" />
     <!--== Ionicons Min CSS ==-->
-    <link href="{{('public/frontend/css/ionicons.min.css')}}" rel="stylesheet" />
+    <link href="{{asset('public/frontend/css/ionicons.min.css')}}" rel="stylesheet" />
     <!--== Font-Awesome Min CSS ==-->
-    <link href="{{('public/frontend/css/font-awesome.min.css')}}" rel="stylesheet" />
+    <link href="{{asset('public/frontend/css/font-awesome.min.css')}}" rel="stylesheet" />
     <!--== Bootstrap Min CSS ==-->
-    <link href="{{('public/frontend/css/bootstrap.min.css')}}" rel="stylesheet" />
+    <link href="{{asset('public/frontend/css/bootstrap.min.css')}}" rel="stylesheet" />
 
     <!--== Main Style CSS ==-->
-    <link href="{{('public/frontend/css/style.css')}}" rel="stylesheet" />
+    <link href="{{asset('public/frontend/css/style.css')}}" rel="stylesheet" />
     <!--== Helper Min CSS ==-->
-    <link href="{{('public/frontend/css/helper.min.css')}}" rel="stylesheet" />
+    <link href="{{asset('public/frontend/css/helper.min.css')}}" rel="stylesheet" />
     <!-- endbuild -->
 
     <!--[if lt IE 9]>
@@ -54,7 +54,7 @@
             <div class="row align-items-center">
                 <div class="col-sm-4 col-lg-2">
                     <div class="site-logo text-center text-sm-left">
-                        <a href="{{URL::to('/')}}"><img src="{{('public/frontend/images/logogmen.png')}}" alt="Logo" /></a>
+                        <a href="{{URL::to('/')}}"><img src="{{asset('public/frontend/images/logogmen.png')}}" alt="Logo" /></a>
                         {{-- <a href="index.html" style="font-size: xx-large;color: black;font-weight: bold;">GMEN</a> --}}
                     </div>
                 </div>
@@ -103,7 +103,7 @@
                         </style>
                         <?php if(Auth::check()){?>
                             <div class="dropdown">
-                                <a href="{{URL::to('/profile')}}" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="{{('public/frontend/images/admin.jpg')}}" alt="" class="user-avatar-header"></a>
+                                <a href="{{URL::to('/profile')}}" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="{{asset('public/frontend/images/admin.jpg')}}" alt="" class="user-avatar-header"></a>
                                 {{-- <i style="font-size: 25px" class="fa fa-user dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i> --}}
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                     <a class="dropdown-item" href="{{URL::to('/profile')}}"><i class="fa fa-user"> </i> Tài khoản của tôi</a>
@@ -123,7 +123,7 @@
                         {{-- <div class="mini-cart-wrap">
                             <a href="{{URL::to('/cart')}}" class="btn-mini-cart"> --}}
                                 {{-- <i class="fa fa-bell" style="font-size: 1.5rem;"></i> --}}
-                                {{-- <img src="{{('public/frontend/images/icons/iconfinder_icon-ios7-bell-outline_211693.png')}}" style="width: 2rem"/>
+                                {{-- <img src="{{asset('public/frontend/images/icons/iconfinder_icon-ios7-bell-outline_211693.png')}}" style="width: 2rem"/>
                                 <span class="cart-total">3</span>
                             </a>
                         </div> --}}
@@ -136,7 +136,7 @@
                                 <div class="mini-cart-product">
                                     <div class="mini-product">
                                         <div class="mini-product__thumb">
-                                            <a href="single-product.html"><img src="{{('public/frontend/images/product/product-1.png')}}" alt="product" /></a>
+                                            <a href="single-product.html"><img src="{{asset('public/frontend/images/product/product-1.png')}}" alt="product" /></a>
                                         </div>
                                         <div class="mini-product__info">
                                             <h2 class="title"><a href="single-product.html">Auto Clutch & Brake</a></h2>
@@ -150,7 +150,7 @@
 
                                     <div class="mini-product">
                                         <div class="mini-product__thumb">
-                                            <a href="single-product.html"><img src="{{('public/frontend/images/product/product-2.png')}}" alt="product" /></a>
+                                            <a href="single-product.html"><img src="{{asset('public/frontend/images/product/product-2.png')}}" alt="product" /></a>
                                         </div>
                                         <div class="mini-product__info">
                                             <h2 class="title"><a href="single-product.html">Leather Steering Wheel</a></h2>
@@ -164,7 +164,7 @@
 
                                     <div class="mini-product">
                                         <div class="mini-product__thumb">
-                                            <a href="single-product.html"><img src="{{('public/frontend/images/product/product-3.png')}}" alt="product" /></a>
+                                            <a href="single-product.html"><img src="{{asset('public/frontend/images/product/product-3.png')}}" alt="product" /></a>
                                         </div>
                                         <div class="mini-product__info">
                                             <h2 class="title"><a href="single-product.html">Leather Steering Wheel</a></h2>

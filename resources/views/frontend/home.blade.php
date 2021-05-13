@@ -100,7 +100,7 @@
                                     <!-- Start Product Item -->
                                     <div class="product-item">
                                         <div class="product-item__thumb">
-                                            <a href="single-product.html">
+                                            <a href="{{URL::to('/singleproduct'.'/'.$item->id)}}">
                                                 <img class="thumb-primary" src="{{ URL::to('/') }}/public/storage/products/@php
                                                 echo $item->images
                                             @endphp"  alt="Product" />
@@ -114,7 +114,7 @@
                                         -webkit-box-orient: vertical;
                                         display: -webkit-box; --}}
                                         <div class="product-item__content">
-                                            <h4 class="title"><a href="single-product.html">@php
+                                            <h4 class="title"><a href="{{URL::to('/singleproduct'.'/'.$item->id)}}">@php
                                                 echo $item->name
                                             @endphp</a></h4>
                                             <span class="price"><strong>Giá:</strong> @php
@@ -122,7 +122,7 @@
                                             @endphp VNĐ<del> @php
                                                 echo $item->price
                                             @endphp VNĐ</del></span>
-                                            <a href="{{URL::to('/singleproduct')}}" type="button" class="btn btn-secondary">Chọn ngay</a>
+                                            <a href="{{URL::to('/singleproduct'.'/'.$item->id)}}" type="button" class="btn btn-secondary">Chọn ngay</a>
                                         </div>
                                         {{-- <div class="product-item__action">
 
@@ -165,7 +165,7 @@
                                 <div class="col">
                                     <div class="product-item">
                                         <div class="product-item__thumb">
-                                            <a href="single-product.html">
+                                            <a href="{{URL::to('/singleproduct'.'/'.$item->id)}}">
                                                 <img class="thumb-primary" src="{{ URL::to('/') }}/public/storage/products/@php
                                                 echo $item->images
                                             @endphp" alt="Product" />
@@ -176,7 +176,7 @@
                                         </div>
 
                                         <div class="product-item__content">
-                                            <h4 class="title"><a href="single-product.html">@php
+                                            <h4 class="title"><a href="{{URL::to('/singleproduct'.'/'.$item->id)}}">@php
                                                 echo $item->name
                                             @endphp</a></h4>
                                             @if ($item->sale!=null)
@@ -190,7 +190,7 @@
                                                     echo $item->price
                                                 @endphp VNĐ</span>
                                             @endif
-                                            <a href="{{URL::to('/singleproduct')}}" type="button" class="btn btn-secondary">Chọn ngay</a>
+                                            <a href="{{URL::to('/singleproduct'.'/'.$item->id)}}" type="button" class="btn btn-secondary">Chọn ngay</a>
                                         </div>
 
                                         {{-- <div class="product-item__action">

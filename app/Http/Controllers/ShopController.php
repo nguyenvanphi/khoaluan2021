@@ -11,7 +11,9 @@ class ShopController extends Controller
     public function index(Request $request)
     {   
         if(empty($request->all())||$request->search_product==null){
-            $products = Products::paginate(8);
+            $products = DB::table('products')
+            ->Where('is_del','=','0')
+            ->paginate(8);
             $from = $products->firstItem();
             $to = $products->lastItem();
             return view('frontend.pages.shop')->with(compact('products','from','to'));

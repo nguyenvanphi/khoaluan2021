@@ -83,7 +83,7 @@
                             <div class="col-sm-6 col-lg-4 col-xl-3">
                                 <div class="product-item">
                                     <div class="product-item__thumb">
-                                        <a href="{{URL::to('/singleproduct')}}">
+                                        <a href="{{URL::to('/singleproduct'.'/'.$product->id)}}">
                                             <img class="thumb-primary" src="{{ URL::to('/') }}/public/storage/products/@php
                                             echo $product->images
                                         @endphp" alt="Product" />
@@ -103,7 +103,7 @@
             
                                     <div class="product-item__content">
                                         <div class="product-item__info">
-                                            <h4 class="title"><a href="{{URL::to('/singleproduct')}}">@php
+                                            <h4 class="title"><a href="{{URL::to('/singleproduct'.'/'.$product->id)}}">@php
                                                 echo $product->name
                                             @endphp</a></h4>
                                             @if ($product->sale!=null)
@@ -118,7 +118,7 @@
                                                 @endphp VNĐ</span>
                                             @endif
                                             <br>
-                                            <a href="{{URL::to('/singleproduct')}}" type="button" class="btn btn-secondary">Chọn ngay</a>
+                                            <a href="{{URL::to('/singleproduct'.'/'.$product->id)}}" type="button" class="btn btn-secondary">Chọn ngay</a>
                                         </div>
             
                                         {{-- <div class="product-item__action" style="padding-top: 10px;padding-left: 10px;">

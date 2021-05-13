@@ -7,7 +7,7 @@
                 <div class="col-lg-3">
                     <div class="widget-item">
                         <div class="about-widget">
-                            <a href="index.html"><img src="{{('public/frontend/images/logogmen-light.png')}}" alt="Logo" /></a>
+                            <a href="index.html"><img src="{{asset('public/frontend/images/logogmen-light.png')}}" alt="Logo" /></a>
                             <p>GMEN là cửa hàng áo quần tốt nhất cho nam giới. Bạn cần loại trang phục, áo quần nam giới nào thì đều có thể mua ở đây.</p>
                         </div>
                     </div>
@@ -95,7 +95,7 @@
         <div class="off-canvas-content">
             <div class="off-canvas-header">
                 <div class="logo">
-                    <a href="index.html"><img src="{{('public/frontend/images/logogmen.png')}}" alt="Logo"></a>
+                    <a href="index.html"><img src="{{asset('public/frontend/images/logogmen.png')}}" alt="Logo"></a>
                 </div>
                 <div class="close-btn">
                     <button class="btn-close"><i class="ion-android-close"></i></button>
@@ -114,30 +114,30 @@
 <!--=======================Javascript============================-->
 <!-- build:js public/frontend/js/app.min.js -->
 <!--=== Modernizr Min Js ===-->
-<script src="{{('public/frontend/js/modernizr-3.6.0.min.js')}}"></script>
+<script src="{{asset('public/frontend/js/modernizr-3.6.0.min.js')}}"></script>
 <!--=== jQuery Min Js ===-->
-<script src="{{('public/frontend/js/jquery-3.3.1.min.js')}}"></script>
+<script src="{{asset('public/frontend/js/jquery-3.3.1.min.js')}}"></script>
 <!--=== jQuery Migration Min Js ===-->
-<script src="{{('public/frontend/js/jquery-migrate-1.2.1.min.js')}}"></script>
+<script src="{{asset('public/frontend/js/jquery-migrate-1.2.1.min.js')}}"></script>
 <!--=== Popper Min Js ===-->
-<script src="{{('public/frontend/js/popper.min.js')}}"></script>
+<script src="{{asset('public/frontend/js/popper.min.js')}}"></script>
 <!--=== Bootstrap Min Js ===-->
-<script src="{{('public/frontend/js/bootstrap.min.js')}}"></script>
+<script src="{{asset('public/frontend/js/bootstrap.min.js')}}"></script>
 <!--=== Slicknav Min Js ===-->
-<script src="{{('public/frontend/js/jquery.slicknav.min.js')}}"></script>
+<script src="{{asset('public/frontend/js/jquery.slicknav.min.js')}}"></script>
 <!--=== Magnific Popup Min Js ===-->
-<script src="{{('public/frontend/js/jquery.magnific-popup.min.js')}}"></script>
+<script src="{{asset('public/frontend/js/jquery.magnific-popup.min.js')}}"></script>
 <!--=== Slick Slider Min Js ===-->
-<script src="{{('public/frontend/js/slick.min.js')}}"></script>
+<script src="{{asset('public/frontend/js/slick.min.js')}}"></script>
 <!--=== Nice Select Min Js ===-->
-<script src="{{('public/frontend/js/jquery.nice-select.min.js')}}"></script>
+<script src="{{asset('public/frontend/js/jquery.nice-select.min.js')}}"></script>
 <!--=== Leaflet Min Js ===-->
-<script src="{{('public/frontend/js/leaflet.min.js')}}"></script>
+<script src="{{asset('public/frontend/js/leaflet.min.js')}}"></script>
 <!--=== Countdown Js ===-->
-<script src="{{('public/frontend/js/countdown.js')}}"></script>
+<script src="{{asset('public/frontend/js/countdown.js')}}"></script>
 
 <!--=== Active Js ===-->
-<script src="{{('public/frontend/js/active.js')}}"></script>
+<script src="{{asset('public/frontend/js/active.js')}}"></script>
 <!-- endbuild -->
 
 </body>
