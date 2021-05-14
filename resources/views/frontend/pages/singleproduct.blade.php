@@ -103,41 +103,45 @@
                                         @foreach ($product->description as $description)
                                                 <p>{{$description}}</p>
                                         @endforeach
-                                        <div class="product-config">
-                                            <div class="table-responsive">
-                                                <table class="table table-bordered">
-                                                    <tr>
-                                                        <th class="config-label">Size</th>
-                                                        <td class="config-option">
-                                                            <div class="config-color">
-                                                                <input type="radio" id="size1"
-                                                                name="size" value="S">
-                                                                <label for="size1" style="font-size: large;">S</label>
-                                                                <input type="radio" id="size2"
-                                                                name="size" value="M" style="margin-left: 15px;">
-                                                                <label for="size2" style="font-size: large;">M</label>
-                                                                <input type="radio" id="size3"
-                                                                name="size" value="L" style="margin-left: 15px;">
-                                                                <label for="size3" style="font-size: large;">L</label>
-                                                                <input type="radio" id="size4"
-                                                                name="size" value="X" style="margin-left: 15px;">
-                                                                <label for="size4" style="font-size: large;">X</label>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                </table>
-                                            </div>
-                                        </div>
-
-                                        <div class="product-action">
-                                            <div class="action-top d-sm-flex">
-                                                <div class="pro-qty mr-3 mb-4 mb-sm-0">
-                                                    <label for="quantity" class="sr-only">Quantity</label>
-                                                    <input type="text" id="quantity" title="Quantity" value="1" />
+                                        <form action="" method="POST" id="add-cart">
+                                            {{ csrf_field() }}
+                                            <input type="hidden" name="id" value="{{$product->id}}">
+                                            <div class="product-config">
+                                                <div class="table-responsive">
+                                                    <table class="table table-bordered">
+                                                        @foreach ($attribute_name as $item)
+                                                            <tr>
+                                                                <th class="config-label" style="text-align: center">{{$item['name']}}</th>
+                                                                <td class="config-option">
+                                                                    <div class="config-color">
+                                                                        @foreach ($attributevalues as $item2)
+                                                                            @if ($item2->attribute_id==$item['id'])
+                                                                                <input type="radio"
+                                                                                name="{{$item['name']}}" checked value="{{$item2->id}}" style="margin-left: 15px;">
+                                                                                <label for="size1" style="font-size: large;">{{$item2->value}}</label>
+                                                                            @endif
+                                                                        @endforeach
+                                                                    </div>
+                                                                </td>
+                                                            </tr>
+                                                        @endforeach
+                                                    </table>
                                                 </div>
-                                                <button class="btn btn-bordered">Thêm vào giỏ hàng</button>
                                             </div>
-                                        </div>
+    
+                                            <div class="product-action">
+                                                <div class="action-top d-sm-flex">
+                                                    <div class="pro-qty mr-3 mb-4 mb-sm-0">
+                                                        <label for="quantity" class="sr-only">Quantity</label>
+                                                        <input type="text" name="qty" id="quantity" title="Quantity" value="1" min="1"/>
+                                                    </div>
+                                                    <button type="submit" id="bt-addcart" class="btn btn-bordered">Thêm vào giỏ hàng</button>
+                                                </div>
+                                                <br>
+                                                <p class="text-warning" id="error_quantity"></p>
+                                            </div>
+                                        </form>
+
                                     </div>
                                 </div>
                             </div>
@@ -389,4 +393,60 @@
     </div>
     <!--== End Page Content Wrapper ==-->
 
+@endsection
+@section('script')
+<script>
+    $(document).ready(function(){
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $('#add-cart').on('submit',function(event){
+            event.preventDefault();  
+            $('#error_quantity').html('');
+            if($('#quantity').val()<=0){
+                $('#error_quantity').html('Vui lòng chọn số lượng')
+            }else{
+                $.ajax({
+                url: "{{route('addcart')}}",
+                method:"POST",
+                data:new FormData(this),
+                contentType: false,
+                cache: false,
+                processData: false,
+                dataType:"json",
+                success:function(data)
+                    {  
+                        // alert('test');
+                        // if(data.errors){
+                        //     if(data.errors['images']!=''){
+                        //         $('#error_images').html(data.errors['images']);
+                        //     }
+                        //     if(data.errors['name']!=''){
+                        //         $('#error_name').html(data.errors['name']);
+                        //     }
+                        //     if(data.errors['id']!=''){
+                        //         $('#error_id').html(data.errors['id']);
+                        //     }
+                        // }
+                        if(data.success)
+                        {
+                            $('#cart-total').html(data.number);
+                            toastr.success("Thêm sản phẩm vào giỏ hàng thành công !");
+                        }
+                        // if(data.error)
+                        // {
+                        //     $('#error').css('display','block');
+                        //     $('#error').html(data.error);
+                        // }
+                        // jQuery('#data-category-product').DataTable().ajax.reload();
+                    }
+                });
+            }
+        });
+
+    });
+
+</script>
 @endsection

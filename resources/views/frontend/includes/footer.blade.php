@@ -139,7 +139,8 @@
 <!--=== Active Js ===-->
 <script src="{{asset('public/frontend/js/active.js')}}"></script>
 <!-- endbuild -->
-
+<script src="{{asset('public/backend/js/toastr.min.js')}}"></script>
+@yield('script')
 </body>
 
 </html>

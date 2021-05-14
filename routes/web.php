@@ -31,10 +31,11 @@ Route::get('/','HomeController@index');
 Route::get('/about','PageController@about');
 Route::get('/shop','ShopController@index');
 Route::get('/contact','PageController@contact');
-Route::get('/cart','PageController@cart');
 Route::get('/singleproduct/{id}', 'SingleproductController@index');
 Route::get('/singleproduct', 'PageController@singleproduct');
 Route::get('/search-product','ShopController@index');
+Route::get('/cart','CartController@index');
+Route::post('/addcart', 'CartController@addcart')->name('addcart');
 
 Route::middleware('auth')->group(function () {
     Route::get('logout', 'AuthController@logout');

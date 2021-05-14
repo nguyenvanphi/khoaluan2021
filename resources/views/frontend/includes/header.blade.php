@@ -5,6 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
     {{-- <title>@yield('title')</title> --}}
     <title>The GMEN</title>
@@ -39,7 +40,7 @@
     <!--== Helper Min CSS ==-->
     <link href="{{asset('public/frontend/css/helper.min.css')}}" rel="stylesheet" />
     <!-- endbuild -->
-
+    <link rel="stylesheet" href="{{asset('public/backend/css/toastr.min.css')}}">
     <!--[if lt IE 9]>
     <script src="//oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
     <script src="//oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
@@ -130,7 +131,13 @@
                         <div class="mini-cart-wrap">
                             <a href="{{URL::to('/cart')}}" class="btn-mini-cart">
                                 <i class="ion-bag"></i>
-                                <span class="cart-total">0</span>
+                                <span class="cart-total" id="cart-total">
+                                    @if (session('cart'))
+                                        {{count(session('cart'))}}
+                                    @else
+                                        0
+                                    @endif
+                                </span>
                             </a>
                             {{-- <div class="mini-cart-content">
                                 <div class="mini-cart-product">
