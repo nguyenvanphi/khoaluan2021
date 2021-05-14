@@ -28,119 +28,92 @@
         <div class="cart-page-content-wrap">
             <div class="container container-wide">
                 <div class="row">
-                    <div class="col-lg-8">
+                    <div class="col-lg-9">
                         <div class="shopping-cart-list-area">
-                            <div class="shopping-cart-table table-responsive">
-                                <table class="table table-bordered text-center mb-0">
-                                    <thead>
-                                        <tr>
-                                            <th>Sản phẩm</th>
-                                            <th>Giá</th>
-                                            <th>Số lượng</th>
-                                            <th>Tổng tiền</th>
-                                        </tr>
-                                    </thead>
+                            @if (count($cart)==0)
+                                <h3>Không có sản phầm nào trong giỏ hàng !</h3>
+                            @else
+                                <div class="shopping-cart-table table-responsive">
+                                    <table class="table table-bordered text-center mb-0">
+                                        <thead>
+                                            <tr>
+                                                <th>Sản phẩm</th>
+                                                <th>Giá</th>
+                                                <th>Số lượng</th>
+                                                <th>Tổng tiền</th>
+                                            </tr>
+                                        </thead>
 
-                                    <tbody>
-
-                                        <tr>
-                                            <td class="product-list">
-                                                <div class="cart-product-item d-flex align-items-center">
-                                                    <div class="remove-icon">
-                                                        <button><i class="fa fa-trash-o"></i></button>
-                                                    </div>
-                                                    <a href="single-product.html" class="product-thumb">
-                                                        <img src="{{('public/frontend/images/thegmen/1617940531014ervav4.jpg')}}" alt="Product" />
-                                                    </a>
-                                                    <a href="single-product.html" class="product-name">PIMA POLO SHIRT - COFFEE</a>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <span class="price">150000 VNĐ</span>
-                                            </td>
-                                            <td>
-                                                <div class="pro-qty">
-                                                    <input type="text" class="quantity" title="Quantity" value="1" />
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <span class="price">150000 VNĐ</span>
-                                            </td>
-                                        </tr>
-
-                                        <tr>
-                                            <td class="product-list">
-                                                <div class="cart-product-item d-flex align-items-center">
-                                                    <div class="remove-icon">
-                                                        <button><i class="fa fa-trash-o"></i></button>
-                                                    </div>
-                                                    <a href="single-product.html" class="product-thumb">
-                                                        <img src="{{('public/frontend/images/thegmen/1611071582309vqmxw2l.jpg')}}" alt="Product" />
-                                                    </a>
-                                                    <a href="single-product.html" class="product-name">
-                                                        LINEN COLLAR SHIRT
-                                                    </a>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <span class="price">150000 VNĐ</span>
-                                            </td>
-                                            <td>
-                                                <div class="pro-qty">
-                                                    <input type="text" class="quantity" title="Quantity" value="1" />
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <span class="price">150000 VNĐ</span>
-                                            </td>
-                                        </tr>
-
-                                        <tr>
-                                            <td class="product-list">
-                                                <div class="cart-product-item d-flex align-items-center">
-                                                    <div class="remove-icon">
-                                                        <button><i class="fa fa-trash-o"></i></button>
-                                                    </div>
-                                                    <a href="single-product.html" class="product-thumb">
-                                                        <img src="{{('public/frontend/images/thegmen/16041092557109t8zq.jpg')}}" alt="Product" />
-                                                    </a>
-                                                    <a href="single-product.html" class="product-name">SƠ MI KAKI DENIM</a>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <span class="price">150000 VNĐ</span>
-                                            </td>
-                                            <td>
-                                                <div class="pro-qty">
-                                                    <input type="text" class="quantity" title="Quantity" value="1" />
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <span class="price">150000 VNĐ</span>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-
-                            <div class="cart-coupon-update-area d-sm-flex justify-content-between align-items-center">
-                                {{-- <div class="coupon-form-wrap">
-                                    <form action="#" method="post">
-                                        <label for="coupon" class="sr-only">Coupon Code</label>
-                                        <input type="text" id="coupon" placeholder="Coupon Code" />
-                                        <button class="btn-apply">Apply Button</button>
-                                    </form>
-                                </div> --}}
-
-                                <div class="cart-update-buttons mt-15 mt-sm-0">
-                                    <button class="btn-clear-cart">Xoá giỏ hàng</button>
-                                    <button class="btn-update-cart">Cập nhật giỏ hàng</button>
+                                        <tbody>
+                                            @foreach ($cart as $item)
+                                                <tr>
+                                                    <td class="product-list">
+                                                        <div class="cart-product-item d-flex align-items-center">
+                                                            <div class="remove-icon">
+                                                                <button><i class="fa fa-trash-o"></i></button>
+                                                            </div>
+                                                            <a href="single-product.html" class="product-thumb">
+                                                                <img src="{{ URL::to('/') }}/public/storage/products/@php
+                                                                echo $item['product']->images
+                                                            @endphp" alt="Product" style="width: 100%; max-height: 100px;" />
+                                                            </a>
+                                                            <a href="single-product.html" class="product-name">{{$item['product']->name}} (
+                                                                @php
+                                                                    foreach($item['attribute'] as $attr){
+                                                                       echo $attr['attribute'].':'.$attr['attributevalue'].' ';
+                                                                    }
+                                                                @endphp
+                                                            )</a>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <span class="price">@php
+                                                            if($item['product']->sale==null){
+                                                                echo $item['product']->price;
+                                                            }else{
+                                                                echo $item['product']->sale;
+                                                            }
+                                                        @endphp VNĐ</span>
+                                                    </td>
+                                                    <td>
+                                                        <div class="pro-qty">
+                                                            <input type="text" class="quantity" title="Quantity" value="{{$item['qty']}}" />
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <span class="price">@php
+                                                            if($item['product']->sale==null){
+                                                                echo $item['product']->price*$item['qty'];
+                                                            }else{
+                                                                echo $item['product']->sale*$item['qty'];
+                                                            }
+                                                        @endphp VNĐ</span>
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
                                 </div>
-                            </div>
+
+                                <div class="cart-coupon-update-area d-sm-flex justify-content-between align-items-center">
+                                    {{-- <div class="coupon-form-wrap">
+                                        <form action="#" method="post">
+                                            <label for="coupon" class="sr-only">Coupon Code</label>
+                                            <input type="text" id="coupon" placeholder="Coupon Code" />
+                                            <button class="btn-apply">Apply Button</button>
+                                        </form>
+                                    </div> --}}
+
+                                    <div class="cart-update-buttons mt-15 mt-sm-0">
+                                        <button class="btn-clear-cart">Xoá giỏ hàng</button>
+                                        <button class="btn-update-cart">Cập nhật giỏ hàng</button>
+                                    </div>
+                                </div>
+                            @endif
                         </div>
                     </div>
 
-                    <div class="col-lg-4">
+                    <div class="col-lg-3">
                         <!-- Cart Calculate Area -->
                         <div class="cart-calculate-area mt-sm-40 mt-md-60">
                             <h5 class="cal-title">Tổng tiền giỏ hàng</h5>
@@ -149,7 +122,21 @@
                                 <table class="table table-borderless">
                                     <tr class="cart-sub-total">
                                         <th>Thành tiền</th>
-                                        <td>450000 VNĐ</td>
+                                        @if (count($cart)==0)
+                                            0 VNĐ
+                                        @else
+                                            <td>@php
+                                                $total = 0;
+                                                foreach($cart as $item){
+                                                    if($item['product']->sale==null){
+                                                        $total = $total + $item['product']->price*$item['qty'];
+                                                    }else{
+                                                        $total = $total + $item['product']->sale*$item['qty'];
+                                                    }
+                                                }
+                                                echo $total;
+                                            @endphp VNĐ</td>
+                                        @endif
                                     </tr>
                                     {{-- <tr class="shipping">
                                         <th>Shipping</th>
@@ -187,6 +174,7 @@
                             </div>
 
                             <div class="proceed-checkout-btn">
+                                {{-- style="pointer-events: none;" --}}
                                 <a href="{{URL::to('/checkout')}}" class="btn btn-brand d-block">Đặt hàng</a>
                             </div>
                         </div>

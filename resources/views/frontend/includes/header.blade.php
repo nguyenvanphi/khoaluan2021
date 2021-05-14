@@ -133,7 +133,13 @@
                                 <i class="ion-bag"></i>
                                 <span class="cart-total" id="cart-total">
                                     @if (session('cart'))
-                                        {{count(session('cart'))}}
+                                        @php
+                                            $number = 0;
+                                            foreach(session('cart') as $item){
+                                                $number = $number + $item['qty'];
+                                            }
+                                        @endphp
+                                        {{$number}}
                                     @else
                                         0
                                     @endif

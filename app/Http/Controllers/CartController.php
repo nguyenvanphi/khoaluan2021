@@ -3,13 +3,34 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Products;
 use Illuminate\Support\Facades\DB;
 
 class CartController extends Controller
 {
     public function index(){
         $cart = array();
-        return view('frontend.pages.cart');
+        foreach(session('cart') as $item){
+            $product = Products::find($item['id']);
+            $attribute = array();
+            foreach($item['attribute'] as $item_atr){
+                $attributevalues = DB::table('attributevalues')
+                    ->select('*')
+                    ->Where('id','=',$item_atr)
+                    ->get();
+                foreach($attributevalues as $value){
+                    $attributename = DB::table('attributes')
+                        ->select('*')
+                        ->Where('id','=',$value->attribute_id)
+                        ->get();
+                    foreach($attributename as $name){
+                        $attribute[] = ['attributevalue_id'=>$item_atr,'attributevalue'=>$value->value,'attribute'=>$name->name];
+                    }
+                }
+            }
+            $cart[]=['product'=>$product,'attribute'=>$attribute,'qty'=>$item['qty']];
+        }
+        return view('frontend.pages.cart',['cart'=>$cart]);
     }
 
     public function addcart(Request $request){
