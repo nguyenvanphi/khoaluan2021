@@ -77,7 +77,7 @@
         <div class="container container-wide">
             <div class="product-wrapper product-layout layout-grid">
                 <div class="row mtn-30">
-                    @if ($products)
+                    @if ($products&&count($products)>0)
                         @foreach ($products as $product)
                             <!-- Start Product Item -->
                             <div class="col-sm-6 col-lg-4 col-xl-3">
@@ -136,7 +136,11 @@
                             </div>
                         @endforeach 
                     @else
-                        <h4 class="ml-3 mt-3">Không có sản phẩm !</h4>
+                        @if (count($products)==0)
+                            <h4 class="ml-3 mt-3">Không tìm thấy sản phẩm nào !</h4>
+                        @else
+                            <h4 class="ml-3 mt-3">Không có sản phẩm !</h4>
+                        @endif
                     @endif
                 </div>
             </div>

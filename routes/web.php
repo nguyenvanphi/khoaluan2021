@@ -34,8 +34,10 @@ Route::get('/contact','PageController@contact');
 Route::get('/singleproduct/{id}', 'SingleproductController@index');
 Route::get('/singleproduct', 'PageController@singleproduct');
 Route::get('/search-product','ShopController@index');
-Route::get('/cart','CartController@index');
+Route::get('/cart','PageController@cart');
+Route::resource('loadcart','CartController');
 Route::post('/addcart', 'CartController@addcart')->name('addcart');
+Route::get('/deletecart', 'CartController@deletecart')->name('deletecart');
 
 Route::middleware('auth')->group(function () {
     Route::get('logout', 'AuthController@logout');

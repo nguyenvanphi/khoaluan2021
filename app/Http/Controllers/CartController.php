@@ -10,27 +10,29 @@ class CartController extends Controller
 {
     public function index(){
         $cart = array();
-        foreach(session('cart') as $item){
-            $product = Products::find($item['id']);
-            $attribute = array();
-            foreach($item['attribute'] as $item_atr){
-                $attributevalues = DB::table('attributevalues')
-                    ->select('*')
-                    ->Where('id','=',$item_atr)
-                    ->get();
-                foreach($attributevalues as $value){
-                    $attributename = DB::table('attributes')
+        if(session('cart')){
+            foreach(session('cart') as $item){
+                $product = Products::find($item['id']);
+                $attribute = array();
+                foreach($item['attribute'] as $item_atr){
+                    $attributevalues = DB::table('attributevalues')
                         ->select('*')
-                        ->Where('id','=',$value->attribute_id)
+                        ->Where('id','=',$item_atr)
                         ->get();
-                    foreach($attributename as $name){
-                        $attribute[] = ['attributevalue_id'=>$item_atr,'attributevalue'=>$value->value,'attribute'=>$name->name];
+                    foreach($attributevalues as $value){
+                        $attributename = DB::table('attributes')
+                            ->select('*')
+                            ->Where('id','=',$value->attribute_id)
+                            ->get();
+                        foreach($attributename as $name){
+                            $attribute[] = ['attributevalue_id'=>$item_atr,'attributevalue'=>$value->value,'attribute'=>$name->name];
+                        }
                     }
                 }
+                $cart[]=['product'=>$product,'attribute'=>$attribute,'qty'=>$item['qty']];
             }
-            $cart[]=['product'=>$product,'attribute'=>$attribute,'qty'=>$item['qty']];
         }
-        return view('frontend.pages.cart',['cart'=>$cart]);
+        return response()->json(['cart'=>$cart]);
     }
 
     public function addcart(Request $request){
@@ -57,8 +59,19 @@ class CartController extends Controller
         if(session('cart')){
             $cart = session()->get('cart');
             session()->forget('cart');
-            $product = ['id'=>$id_product,'attribute'=>$attribute,'qty'=>$request->qty];
-            $cart[] = $product;
+            $check = 0; $dem = 0;
+            foreach($cart as $item){
+                if($item['id']==$id_product && !array_diff($attribute,$item['attribute'])){
+                    $cart[$dem]['qty'] = $cart[$dem]['qty'] + $request->qty;
+                    $check = 1;
+                    break;
+                }
+                $dem++;
+            }
+            if($check==0){
+                $product = ['id'=>$id_product,'attribute'=>$attribute,'qty'=>$request->qty];
+                $cart[] = $product;
+            }
             session()->put('cart',$cart);
         }else{
             $cart = array();
@@ -75,4 +88,8 @@ class CartController extends Controller
         return response()->json(['success' => 'Data Update successfully.','number'=> $number]);
     }
 
+    public function deletecart(){
+        session()->forget('cart');
+        return response()->json(['success' => 'Delete Cart successfully.']);
+    }
 }

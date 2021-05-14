@@ -29,12 +29,12 @@
             <div class="container container-wide">
                 <div class="row">
                     <div class="col-lg-9">
-                        <div class="shopping-cart-list-area">
-                            @if (count($cart)==0)
+                        <div class="shopping-cart-list-area" id="datacart">
+                            {{-- @if (count($cart)==0)
                                 <h3>Không có sản phầm nào trong giỏ hàng !</h3>
-                            @else
-                                <div class="shopping-cart-table table-responsive">
-                                    <table class="table table-bordered text-center mb-0">
+                            @else --}}
+                                {{-- <div class="shopping-cart-table table-responsive">
+                                    <table id="" class="table table-bordered text-center mb-0">
                                         <thead>
                                             <tr>
                                                 <th>Sản phẩm</th>
@@ -50,14 +50,14 @@
                                                     <td class="product-list">
                                                         <div class="cart-product-item d-flex align-items-center">
                                                             <div class="remove-icon">
-                                                                <button><i class="fa fa-trash-o"></i></button>
+                                                                <button data-toggle="modal" data-target="#deleteproduct"><i class="fa fa-trash-o"></i></button>
                                                             </div>
-                                                            <a href="single-product.html" class="product-thumb">
+                                                            <a href="{{URL::to('/singleproduct'.'/'.$item['product']->id)}}" class="product-thumb">
                                                                 <img src="{{ URL::to('/') }}/public/storage/products/@php
                                                                 echo $item['product']->images
                                                             @endphp" alt="Product" style="width: 100%; max-height: 100px;" />
                                                             </a>
-                                                            <a href="single-product.html" class="product-name">{{$item['product']->name}} (
+                                                            <a href="{{URL::to('/singleproduct'.'/'.$item['product']->id)}}" class="product-name">{{$item['product']->name}} (
                                                                 @php
                                                                     foreach($item['attribute'] as $attr){
                                                                        echo $attr['attribute'].':'.$attr['attributevalue'].' ';
@@ -93,9 +93,9 @@
                                             @endforeach
                                         </tbody>
                                     </table>
-                                </div>
+                                </div> --}}
 
-                                <div class="cart-coupon-update-area d-sm-flex justify-content-between align-items-center">
+                                {{-- <div class="cart-coupon-update-area d-sm-flex justify-content-between align-items-center"> --}}
                                     {{-- <div class="coupon-form-wrap">
                                         <form action="#" method="post">
                                             <label for="coupon" class="sr-only">Coupon Code</label>
@@ -104,25 +104,25 @@
                                         </form>
                                     </div> --}}
 
-                                    <div class="cart-update-buttons mt-15 mt-sm-0">
-                                        <button class="btn-clear-cart">Xoá giỏ hàng</button>
+                                    {{-- <div class="cart-update-buttons mt-15 mt-sm-0">
+                                        <button class="btn-clear-cart" data-toggle="modal" data-target="#deletecart">Xoá giỏ hàng</button>
                                         <button class="btn-update-cart">Cập nhật giỏ hàng</button>
                                     </div>
-                                </div>
-                            @endif
+                                </div> --}}
+                            {{-- @endif --}}
                         </div>
                     </div>
-
+                    
                     <div class="col-lg-3">
                         <!-- Cart Calculate Area -->
-                        <div class="cart-calculate-area mt-sm-40 mt-md-60">
+                        <div class="cart-calculate-area mt-sm-40 mt-md-60"  style="text-align: center">
                             <h5 class="cal-title">Tổng tiền giỏ hàng</h5>
 
-                            <div class="cart-cal-table table-responsive">
-                                <table class="table table-borderless">
-                                    <tr class="cart-sub-total">
-                                        <th>Thành tiền</th>
-                                        @if (count($cart)==0)
+                            <div class="cart-cal-table table-responsive" id="datatotal">
+                                {{-- <table class="table table-borderless">
+                                    <tr class="cart-sub-total"> --}}
+                                        {{-- <th>Thành tiền</th> --}}
+                                        {{-- @if (count($cart)==0)
                                             0 VNĐ
                                         @else
                                             <td>@php
@@ -137,7 +137,7 @@
                                                 echo $total;
                                             @endphp VNĐ</td>
                                         @endif
-                                    </tr>
+                                    </tr> --}}
                                     {{-- <tr class="shipping">
                                         <th>Shipping</th>
                                         <td>
@@ -170,7 +170,7 @@
                                         <th>Total</th>
                                         <td><b>$299.93</b></td>
                                     </tr> --}}
-                                </table>
+                                {{-- </table> --}}
                             </div>
 
                             <div class="proceed-checkout-btn">
@@ -179,10 +179,235 @@
                             </div>
                         </div>
                     </div>
+                    <div class="modal fade" id="deletecart" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <form action="" id="deletecart_form">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Xoá giỏ hàng</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                    </div>
+                                    <div class="modal-body">
+                                    Bạn có chắc muốn xoá giỏ hàng ?
+                                    </div>
+                                    <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Huỷ</button>
+                                    <button type="submit" class="btn btn-primary">Xoá</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
     <!--== End Page Content Wrapper ==-->
 
+@endsection
+@section('script')
+<script>
+    $(document).ready(function(){
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        toastr.options = {
+            timeOut          : 1000, //default timeout,
+        };
+        load_cart();
+        $('#deletecart_form').on('submit',function(event){
+            event.preventDefault();  
+            $.ajax({
+            url: "{{route('deletecart')}}",
+            method: 'GET',
+            dataType:"json",
+            success:function(data)
+                {  
+                    if(data.success)
+                    {
+                        jQuery('#deletecart').modal('hide');
+                        $('#cart-total').html('0');
+                        load_cart()
+                        toastr.success("Xoá giỏ hàng thành công !");
+                    }
+                }
+            });
+        });
+
+    });
+
+    function load_cart(){
+        $.ajax({
+            url: "/shopthegmen/loadcart",
+            dataType:"json",
+            success:function(data)
+                {  
+                    var total = 0;
+                    var number = 0;
+                    $.each(data, function (key, item) {
+                        $.each(item, function(key2, item2){
+                            number = number + Number(item2['qty']);
+                            if(item2['product']['sale']!=null){
+                                total = total + Number(item2['product']['sale'])*Number(item2['qty'])
+                            }else{
+                                total = total + Number(item2['product']['price'])*Number(item2['qty'])
+                            }
+                        })
+                    });
+                    var html = '';
+                    if(number<=0){
+                        html += '<h3>Không có sản phầm nào trong giỏ hàng !</h3>'
+                    }else{
+                        html += '<div class="shopping-cart-table table-responsive">'
+                        html +=  '<table id="" class="table table-bordered text-center mb-0">'
+                        html +=  '<thead>'
+                        html +=  '<tr>'
+                        html +=   '<th>Sản phẩm</th>'
+                        html += '<th>Giá</th>'
+                        html +=   '<th>Số lượng</th>'
+                        html +=   '<th>Tổng tiền</th>'
+                        html +=  '</tr>'
+                        html += '</thead>'
+                        html +=   '<tbody>'
+                        $.each(data, function (key, item) {
+                            $.each(item, function(key2, item2){
+                                html += '<tr>'
+                                html += '<td class="product-list">'
+                                html += '<div class="cart-product-item d-flex align-items-center">'
+                                html +='<div class="remove-icon">'
+                                html +='<button data-toggle="modal" data-target="#deleteproduct'
+                                html += item2['product']['id']
+                                html+='"><i class="fa fa-trash-o"></i></button>'
+                                html +='</div>'
+                                var link = '{{URL::to("/singleproduct/")}}'
+                                link += '/'
+                                link += item2['product']['id']
+                                html += '<a href="'
+                                html += link
+                                html +='" class="product-thumb">'
+                                html += '<img src="{{ URL::to("/") }}/public/storage/products/'
+                                html += item2['product']['images']
+                                html +='" alt="Product" style="width: 100%; max-height: 100px;" />'
+                                html += '</a>'
+                                html +='<a href="'
+                                html += link
+                                html+='" class="product-name">'
+                                html += item2['product']['name']
+                                html += ' ( '
+                                $.each(item2['attribute'], function(key3, item3){
+                                    html += item3['attribute']
+                                    html += ':'
+                                    html += item3['attributevalue']
+                                    html += ' '
+                                });
+                                html += ')'
+                                html += '</a>'
+                                html += '</div>'
+                                html += '</td>'
+                                html += '<td><span class="price">'
+                                if(item2['product']['sale']!=null){
+                                    html += Number(item2['product']['sale'])
+                                }else{
+                                    html +=  Number(item2['product']['price'])
+                                } 
+                                html += ' VNĐ</span></td>'
+                                html += '<td>'
+                                html += '<div class="pro-qty">'
+                                html += '<input type="text" class="quantity" title="Quantity" value="'
+                                html += Number(item2['qty'])
+                                html += '" />'
+                                html +='</div>'
+                                html += '</td>'
+                                html += '<td><span class="price">'
+                                if(item2['product']['sale']!=null){
+                                    html += Number(item2['product']['sale'])*Number(item2['qty'])
+                                }else{
+                                    html +=  Number(item2['product']['price'])*Number(item2['qty'])
+                                }
+                                html += ' VNĐ</span></td>'
+                                html += '</tr>'
+                                html +='<div class="modal fade" id="deleteproduct'
+                                html += item2['product']['id']
+                                html +='" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">'
+                                html +=    '<div class="modal-dialog" role="document">'
+                                html +=        '<form action="" id="deleteproduct_form">'
+                                html += '<input type="hidden" value="'
+                                html += item2['product']['id']
+                                html += '" name="">'
+                                html +=            '<div class="modal-content">'
+                                html +=                '<div class="modal-header">'
+                                html +=                '<h5 class="modal-title" id="exampleModalLabel">Xoá sản phẩm</h5>'
+                                html +=                '<button type="button" class="close" data-dismiss="modal" aria-label="Close">'
+                                html +=                    '<span aria-hidden="true">&times;</span>'
+                                html +=               ' </button>'
+                                html +=                '</div>'
+                                html +=               '<div class="modal-body">'
+                                html +=                'Bạn có chắc muốn xoá sản phẩm này khỏi giỏ hàng ?'
+                                html +=                '</div>'
+                                html +=                '<div class="modal-footer">'
+                                html +=                '<button type="button" class="btn btn-secondary" data-dismiss="modal">Huỷ</button>'
+                                html +=                '<button type="submit" class="btn btn-primary">Xoá</button>'
+                                html +=                '</div>'
+                                html +=           ' </div>'
+                                html +=        '</form>'
+                                html +=    '</div>'
+                                html +='</div>'
+                            })
+                        });
+                        html +=   '</tbody>'
+                        html +=  '</table>'
+                        html += '</div>'
+                        html += '<div class="cart-coupon-update-area d-sm-flex justify-content-between align-items-center">'
+                        html +='<div class="cart-update-buttons mt-15 mt-sm-0">'
+                        html +='<button class="btn-clear-cart" data-toggle="modal" data-target="#deletecart">Xoá giỏ hàng </button>'
+                        html +='<button class="btn-update-cart"> Cập nhật giỏ hàng</button>'
+                        html +='</div>'
+                        html +='</div>'
+                    }
+
+                    var html2 = '';
+                    html2 += '<table class="table table-borderless" >';
+                        html2 += '<tr class="cart-sub-total">';   
+                        if(number>0){
+                            html2 += total;
+                            html2 += ' VNĐ'
+                        }else{
+                            html2 += '0 VNĐ'
+                        }
+                        html2 += '</tr>'
+                    html2 += '</table>';
+                    $('#datacart').html(html);
+                    $('#datatotal').html(html2);
+                    $('#cart-total').html(number);
+                    inputqty();
+                }
+            });
+    }
+    function inputqty(){
+        var proQty = $(".pro-qty");
+        proQty.append('<a href="#" class="inc qty-btn">+</a>');
+        proQty.append('<a href="#" class= "dec qty-btn">-</a>');
+        $('.qty-btn').on('click', function(e) {
+            e.preventDefault();
+            var $button = $(this);
+            var oldValue = $button.parent().find('input').val();
+            if ($button.hasClass('inc')) {
+                var newVal = parseFloat(oldValue) + 1;
+            } else {
+                // Don't allow decrementing below zero
+                if (oldValue > 1) {
+                    var newVal = parseFloat(oldValue) - 1;
+                } else {
+                    newVal = 1;
+                }
+            }
+            $button.parent().find('input').val(newVal);
+        });
+    }
+
+</script>
 @endsection

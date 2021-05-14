@@ -397,6 +397,9 @@
 @section('script')
 <script>
     $(document).ready(function(){
+        toastr.options = {
+            timeOut          : 1000, //default timeout,
+        };
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -408,6 +411,7 @@
             if($('#quantity').val()<=0){
                 $('#error_quantity').html('Vui lòng chọn số lượng')
             }else{
+                $('#bt-addcart').addClass('disabled');
                 $.ajax({
                 url: "{{route('addcart')}}",
                 method:"POST",
@@ -418,29 +422,12 @@
                 dataType:"json",
                 success:function(data)
                     {  
-                        // alert('test');
-                        // if(data.errors){
-                        //     if(data.errors['images']!=''){
-                        //         $('#error_images').html(data.errors['images']);
-                        //     }
-                        //     if(data.errors['name']!=''){
-                        //         $('#error_name').html(data.errors['name']);
-                        //     }
-                        //     if(data.errors['id']!=''){
-                        //         $('#error_id').html(data.errors['id']);
-                        //     }
-                        // }
                         if(data.success)
                         {
                             $('#cart-total').html(data.number);
                             toastr.success("Thêm sản phẩm vào giỏ hàng thành công !");
+                            $('#bt-addcart').removeClass('disabled');
                         }
-                        // if(data.error)
-                        // {
-                        //     $('#error').css('display','block');
-                        //     $('#error').html(data.error);
-                        // }
-                        // jQuery('#data-category-product').DataTable().ajax.reload();
                     }
                 });
             }
