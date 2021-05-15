@@ -37,7 +37,9 @@ Route::get('/search-product','ShopController@index');
 Route::get('/cart','PageController@cart');
 Route::resource('loadcart','CartController');
 Route::post('/addcart', 'CartController@addcart')->name('addcart');
+Route::get('/deleteproductcart/{id}/{attribute_id}', 'CartController@deleteproductcart');
 Route::get('/deletecart', 'CartController@deletecart')->name('deletecart');
+Route::post('/updatecart', 'CartController@updatecart')->name('updatecart');
 
 Route::middleware('auth')->group(function () {
     Route::get('logout', 'AuthController@logout');

@@ -29,88 +29,90 @@
             <div class="container container-wide">
                 <div class="row">
                     <div class="col-lg-9">
-                        <div class="shopping-cart-list-area" id="datacart">
-                            {{-- @if (count($cart)==0)
-                                <h3>Không có sản phầm nào trong giỏ hàng !</h3>
-                            @else --}}
-                                {{-- <div class="shopping-cart-table table-responsive">
-                                    <table id="" class="table table-bordered text-center mb-0">
-                                        <thead>
-                                            <tr>
-                                                <th>Sản phẩm</th>
-                                                <th>Giá</th>
-                                                <th>Số lượng</th>
-                                                <th>Tổng tiền</th>
-                                            </tr>
-                                        </thead>
-
-                                        <tbody>
-                                            @foreach ($cart as $item)
+                        <form id="form_update_cart">
+                            <div class="shopping-cart-list-area" id="datacart">
+                                {{-- @if (count($cart)==0)
+                                    <h3>Không có sản phầm nào trong giỏ hàng !</h3>
+                                @else --}}
+                                    {{-- <div class="shopping-cart-table table-responsive">
+                                        <table id="" class="table table-bordered text-center mb-0">
+                                            <thead>
                                                 <tr>
-                                                    <td class="product-list">
-                                                        <div class="cart-product-item d-flex align-items-center">
-                                                            <div class="remove-icon">
-                                                                <button data-toggle="modal" data-target="#deleteproduct"><i class="fa fa-trash-o"></i></button>
-                                                            </div>
-                                                            <a href="{{URL::to('/singleproduct'.'/'.$item['product']->id)}}" class="product-thumb">
-                                                                <img src="{{ URL::to('/') }}/public/storage/products/@php
-                                                                echo $item['product']->images
-                                                            @endphp" alt="Product" style="width: 100%; max-height: 100px;" />
-                                                            </a>
-                                                            <a href="{{URL::to('/singleproduct'.'/'.$item['product']->id)}}" class="product-name">{{$item['product']->name}} (
-                                                                @php
-                                                                    foreach($item['attribute'] as $attr){
-                                                                       echo $attr['attribute'].':'.$attr['attributevalue'].' ';
-                                                                    }
-                                                                @endphp
-                                                            )</a>
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <span class="price">@php
-                                                            if($item['product']->sale==null){
-                                                                echo $item['product']->price;
-                                                            }else{
-                                                                echo $item['product']->sale;
-                                                            }
-                                                        @endphp VNĐ</span>
-                                                    </td>
-                                                    <td>
-                                                        <div class="pro-qty">
-                                                            <input type="text" class="quantity" title="Quantity" value="{{$item['qty']}}" />
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <span class="price">@php
-                                                            if($item['product']->sale==null){
-                                                                echo $item['product']->price*$item['qty'];
-                                                            }else{
-                                                                echo $item['product']->sale*$item['qty'];
-                                                            }
-                                                        @endphp VNĐ</span>
-                                                    </td>
+                                                    <th>Sản phẩm</th>
+                                                    <th>Giá</th>
+                                                    <th>Số lượng</th>
+                                                    <th>Tổng tiền</th>
                                                 </tr>
-                                            @endforeach
-                                        </tbody>
-                                    </table>
-                                </div> --}}
+                                            </thead>
 
-                                {{-- <div class="cart-coupon-update-area d-sm-flex justify-content-between align-items-center"> --}}
-                                    {{-- <div class="coupon-form-wrap">
-                                        <form action="#" method="post">
-                                            <label for="coupon" class="sr-only">Coupon Code</label>
-                                            <input type="text" id="coupon" placeholder="Coupon Code" />
-                                            <button class="btn-apply">Apply Button</button>
-                                        </form>
+                                            <tbody>
+                                                @foreach ($cart as $item)
+                                                    <tr>
+                                                        <td class="product-list">
+                                                            <div class="cart-product-item d-flex align-items-center">
+                                                                <div class="remove-icon">
+                                                                    <button data-toggle="modal" data-target="#deleteproduct"><i class="fa fa-trash-o"></i></button>
+                                                                </div>
+                                                                <a href="{{URL::to('/singleproduct'.'/'.$item['product']->id)}}" class="product-thumb">
+                                                                    <img src="{{ URL::to('/') }}/public/storage/products/@php
+                                                                    echo $item['product']->images
+                                                                @endphp" alt="Product" style="width: 100%; max-height: 100px;" />
+                                                                </a>
+                                                                <a href="{{URL::to('/singleproduct'.'/'.$item['product']->id)}}" class="product-name">{{$item['product']->name}} (
+                                                                    @php
+                                                                        foreach($item['attribute'] as $attr){
+                                                                        echo $attr['attribute'].':'.$attr['attributevalue'].' ';
+                                                                        }
+                                                                    @endphp
+                                                                )</a>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <span class="price">@php
+                                                                if($item['product']->sale==null){
+                                                                    echo $item['product']->price;
+                                                                }else{
+                                                                    echo $item['product']->sale;
+                                                                }
+                                                            @endphp VNĐ</span>
+                                                        </td>
+                                                        <td>
+                                                            <div class="pro-qty">
+                                                                <input type="text" class="quantity" title="Quantity" value="{{$item['qty']}}" />
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <span class="price">@php
+                                                                if($item['product']->sale==null){
+                                                                    echo $item['product']->price*$item['qty'];
+                                                                }else{
+                                                                    echo $item['product']->sale*$item['qty'];
+                                                                }
+                                                            @endphp VNĐ</span>
+                                                        </td>
+                                                    </tr>
+                                                @endforeach
+                                            </tbody>
+                                        </table>
                                     </div> --}}
 
-                                    {{-- <div class="cart-update-buttons mt-15 mt-sm-0">
-                                        <button class="btn-clear-cart" data-toggle="modal" data-target="#deletecart">Xoá giỏ hàng</button>
-                                        <button class="btn-update-cart">Cập nhật giỏ hàng</button>
-                                    </div>
-                                </div> --}}
-                            {{-- @endif --}}
-                        </div>
+                                    {{-- <div class="cart-coupon-update-area d-sm-flex justify-content-between align-items-center"> --}}
+                                        {{-- <div class="coupon-form-wrap">
+                                            <form action="#" method="post">
+                                                <label for="coupon" class="sr-only">Coupon Code</label>
+                                                <input type="text" id="coupon" placeholder="Coupon Code" />
+                                                <button class="btn-apply">Apply Button</button>
+                                            </form>
+                                        </div> --}}
+
+                                        {{-- <div class="cart-update-buttons mt-15 mt-sm-0">
+                                            <button class="btn-clear-cart" data-toggle="modal" data-target="#deletecart">Xoá giỏ hàng</button>
+                                            <button class="btn-update-cart">Cập nhật giỏ hàng</button>
+                                        </div>
+                                    </div> --}}
+                                {{-- @endif --}}
+                            </div>
+                        </form>
                     </div>
                     
                     <div class="col-lg-3">
@@ -200,6 +202,25 @@
                             </form>
                         </div>
                     </div>
+                    <div class="modal fade" id="deleteproduct" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Xoá sản phẩm</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                    </div>
+                                    <div class="modal-body">
+                                    Bạn có chắc muốn xoá sản phẩm khỏi giỏ hàng ?
+                                    </div>
+                                    <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Huỷ</button>
+                                    <button class="btn btn-primary" id="btn_deleteproductcart" >Xoá</button>
+                                    </div>
+                                </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -216,7 +237,7 @@
             }
         });
         toastr.options = {
-            timeOut          : 1000, //default timeout,
+            timeOut          : 650, //default timeout,
         };
         load_cart();
         $('#deletecart_form').on('submit',function(event){
@@ -231,9 +252,60 @@
                     {
                         jQuery('#deletecart').modal('hide');
                         $('#cart-total').html('0');
-                        load_cart()
+                        load_cart();
                         toastr.success("Xoá giỏ hàng thành công !");
                     }
+                }
+            });
+        });
+        var cp_id;
+        var attribute_id;
+        $(document).on('click', '.deleteproductcart', function(){
+            cp_id = $(this).attr('id');
+            attribute_id = $(this).attr('par');
+            jQuery('#deleteproduct').modal('show');
+        });
+        $('#btn_deleteproductcart').on('click',function(){
+            $.ajax({
+            url: "/shopthegmen/deleteproductcart/"+cp_id+"/"+attribute_id,
+            method: 'GET',
+            dataType:"json",
+            success:function(data)
+                {  
+                    if(data.success)
+                    {
+                        jQuery('#deleteproduct').modal('hide');
+                        load_cart();
+                        toastr.success("Xoá sản phẩm thành công !");
+                    }
+                }
+            });
+        });
+        // $('.qty-btn').on('click', function(e) { 
+        //     e.preventDefault();
+        //     alert('test');
+        //     $('#updatecart').prop('disabled', false);
+        // });
+        $('#form_update_cart').on('submit',function(event){
+            // $('#bt-addcart').addClass('disabled');
+            event.preventDefault();
+            $.ajax({
+            url: "{{route('updatecart')}}",
+            method:"POST",
+            data:new FormData(this),
+            contentType: false,
+            cache: false,
+            processData: false,
+            dataType:"json",
+            success:function(data)
+                {  
+                    // if(data.success)
+                    // {
+                    //     $('#cart-total').html(data.number);
+                        load_cart()
+                        toastr.success("Cập nhật giỏ hàng thành công !");
+                    //     $('#bt-addcart').removeClass('disabled');
+                    // }
                 }
             });
         });
@@ -260,10 +332,10 @@
                     });
                     var html = '';
                     if(number<=0){
-                        html += '<h3>Không có sản phầm nào trong giỏ hàng !</h3>'
+                        html += '<h3>Không có sản phẩm nào trong giỏ hàng !</h3>'
                     }else{
                         html += '<div class="shopping-cart-table table-responsive">'
-                        html +=  '<table id="" class="table table-bordered text-center mb-0">'
+                        html +=  '<table id="data_cart" class="table table-bordered text-center mb-0">'
                         html +=  '<thead>'
                         html +=  '<tr>'
                         html +=   '<th>Sản phẩm</th>'
@@ -279,9 +351,20 @@
                                 html += '<td class="product-list">'
                                 html += '<div class="cart-product-item d-flex align-items-center">'
                                 html +='<div class="remove-icon">'
-                                html +='<button data-toggle="modal" data-target="#deleteproduct'
+                                html += '<input type="hidden" name="id'
+                                html += key2
+                                html += '" value="'
                                 html += item2['product']['id']
-                                html+='"><i class="fa fa-trash-o"></i></button>'
+                                html +='">'
+                                html +='<button type="button" class="deleteproductcart" id="'
+                                html += item2['product']['id']
+                                html +='" '
+                                html += 'par="'
+                                $.each(item2['attribute'], function(key3, item3){
+                                   html += item3['attributevalue_id']
+                                });
+                                html += ' "'
+                                html +=' ><i class="fa fa-trash-o"></i></button>'
                                 html +='</div>'
                                 var link = '{{URL::to("/singleproduct/")}}'
                                 link += '/'
@@ -303,6 +386,11 @@
                                     html += ':'
                                     html += item3['attributevalue']
                                     html += ' '
+                                    html += '<input type="hidden" name="attribute'
+                                    html += key2
+                                    html += '" value="'
+                                    html += item3['attributevalue_id']
+                                    html +='">' 
                                 });
                                 html += ')'
                                 html += '</a>'
@@ -317,7 +405,9 @@
                                 html += ' VNĐ</span></td>'
                                 html += '<td>'
                                 html += '<div class="pro-qty">'
-                                html += '<input type="text" class="quantity" title="Quantity" value="'
+                                html += '<input type="text" class="quantity" title="Quantity" name="qty'
+                                html += key2
+                                html += '" value="'
                                 html += Number(item2['qty'])
                                 html += '" />'
                                 html +='</div>'
@@ -330,32 +420,6 @@
                                 }
                                 html += ' VNĐ</span></td>'
                                 html += '</tr>'
-                                html +='<div class="modal fade" id="deleteproduct'
-                                html += item2['product']['id']
-                                html +='" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">'
-                                html +=    '<div class="modal-dialog" role="document">'
-                                html +=        '<form action="" id="deleteproduct_form">'
-                                html += '<input type="hidden" value="'
-                                html += item2['product']['id']
-                                html += '" name="">'
-                                html +=            '<div class="modal-content">'
-                                html +=                '<div class="modal-header">'
-                                html +=                '<h5 class="modal-title" id="exampleModalLabel">Xoá sản phẩm</h5>'
-                                html +=                '<button type="button" class="close" data-dismiss="modal" aria-label="Close">'
-                                html +=                    '<span aria-hidden="true">&times;</span>'
-                                html +=               ' </button>'
-                                html +=                '</div>'
-                                html +=               '<div class="modal-body">'
-                                html +=                'Bạn có chắc muốn xoá sản phẩm này khỏi giỏ hàng ?'
-                                html +=                '</div>'
-                                html +=                '<div class="modal-footer">'
-                                html +=                '<button type="button" class="btn btn-secondary" data-dismiss="modal">Huỷ</button>'
-                                html +=                '<button type="submit" class="btn btn-primary">Xoá</button>'
-                                html +=                '</div>'
-                                html +=           ' </div>'
-                                html +=        '</form>'
-                                html +=    '</div>'
-                                html +='</div>'
                             })
                         });
                         html +=   '</tbody>'
@@ -363,10 +427,11 @@
                         html += '</div>'
                         html += '<div class="cart-coupon-update-area d-sm-flex justify-content-between align-items-center">'
                         html +='<div class="cart-update-buttons mt-15 mt-sm-0">'
-                        html +='<button class="btn-clear-cart" data-toggle="modal" data-target="#deletecart">Xoá giỏ hàng </button>'
-                        html +='<button class="btn-update-cart"> Cập nhật giỏ hàng</button>'
+                        html +='<button type="button" class="btn-clear-cart" data-toggle="modal" data-target="#deletecart">Xoá giỏ hàng </button>'
+                        html +='<button type="submit" class="btn-update-cart" id="updatecart" > Cập nhật giỏ hàng</button>'
                         html +='</div>'
                         html +='</div>'
+                        // disabled="true"
                     }
 
                     var html2 = '';

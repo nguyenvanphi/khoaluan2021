@@ -130,10 +130,10 @@
                                         <input type="text" placeholder="Street address Line 2 (Optional)" />
                                     </div> --}}
 
-                                    <div class="input-item">
+                                    {{-- <div class="input-item">
                                         <label for="city" class="sr-only required">City</label>
                                         <input type="text" id="city" placeholder="City" required />
-                                    </div>
+                                    </div> --}}
 
                                     {{-- <div class="input-item">
                                         <label for="state" class="sr-only">State / Divition</label>

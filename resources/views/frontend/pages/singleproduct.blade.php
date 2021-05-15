@@ -398,7 +398,7 @@
 <script>
     $(document).ready(function(){
         toastr.options = {
-            timeOut          : 1000, //default timeout,
+            timeOut          : 500, //default timeout,
         };
         $.ajaxSetup({
             headers: {

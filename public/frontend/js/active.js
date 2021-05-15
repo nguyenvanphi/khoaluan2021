@@ -244,6 +244,8 @@
                 }
             }
             $button.parent().find('input').val(newVal);
+            // document.getElementById('updatecart').disabled = false;
+            // $('#updatecart').prop('disabled', false);
         });
 
         /*--------------------------------------

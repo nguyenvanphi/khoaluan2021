@@ -92,4 +92,44 @@ class CartController extends Controller
         session()->forget('cart');
         return response()->json(['success' => 'Delete Cart successfully.']);
     }
+    public function deleteproductcart($id,$attribute_id){
+        $cart = array();
+        $cart2 = array();
+        $cart = session()->get('cart');
+        $key = 0;
+        foreach($cart as $item){
+            if($item['id']==$id){
+                foreach($item['attribute'] as $item_atr){
+                    if($item_atr==$attribute_id){
+                        unset($cart[$key]);
+                    }else{
+                        $cart2[] = $item;
+                    }
+                }
+            }else{
+                $cart2[] = $item;
+            }
+        }
+        session()->forget('cart');
+        if(count($cart2)>0){
+            session()->put('cart',$cart2);
+        }
+        return response()->json(['success' => 'Delete Product Cart successfully.']);
+    }
+    public function updatecart(Request $request){
+        $cart = array();
+        $cart2 = array();
+        $cart = session()->get('cart');
+        $dem = 0;
+        foreach($cart as $item){
+            $qty = 'qty'.$dem;
+            $product = ['id'=>$item['id'],'attribute'=>$item['attribute'],'qty'=>$request->$qty];
+            $cart2[] = $product;
+            $dem++;
+        }
+        session()->forget('cart');
+        session()->put('cart',$cart2);
+        return response()->json(['success' => 'Delete Cart successfully.']);
+    }
+
 }
