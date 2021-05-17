@@ -23,7 +23,7 @@ class CreateOrdersTable extends Migration
             $table->string('phone');
             $table->string('address');
             $table->integer('total');
-            $table->unsignedInteger('status_order_id');
+            $table->unsignedInteger('status_order_id')->default(1);
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
         });

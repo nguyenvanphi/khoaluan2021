@@ -45,7 +45,9 @@ Route::middleware('auth')->group(function () {
     Route::get('logout', 'AuthController@logout');
     Route::get('/history-orders', 'PageController@history');
     Route::get('/profile', 'PageController@profile');
-    Route::get('/checkout', 'PageController@checkout');
+    Route::get('/order', 'OrderController@index')->middleware('CheckCart');
+    Route::post('/order','OrderController@store')->name('order');
+    Route::get('/thanks','OrderController@thanks')->middleware('CheckOrder')->name('thanks');
 });
 Route::middleware('CheckLoginAdmin')->group(function () {
     

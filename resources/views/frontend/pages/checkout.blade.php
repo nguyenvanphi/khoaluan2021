@@ -66,14 +66,14 @@
                         </div>
                     </div>
                 </div> --}}
-
-                <div class="row">
-                    <div class="col-lg-6">
-                        <!-- Checkout Form Area Start -->
-                        <div class="checkout-billing-details-wrap">
-                            <h2>Thông tin đặt hàng</h2>
-                            <div class="billing-form-wrap">
-                                <form action="#" method="post">
+                <form action="" id="order_form" method="post">
+                    {{ csrf_field() }}
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <!-- Checkout Form Area Start -->
+                            <div class="checkout-billing-details-wrap">
+                                <h2>Thông tin đặt hàng</h2>
+                                <div class="billing-form-wrap">
                                     {{-- <div class="row">
                                         <div class="col-md-6">
                                             <div class="input-item mt-0">
@@ -91,12 +91,14 @@
                                     </div> --}}
                                     <div class="input-item">
                                         <label for="name" class="sr-only required">Full Name</label>
-                                        <input type="text" id="name" placeholder="Full Name" required />
+                                        <input type="text" id="name" name="name_order" placeholder="Full Name" required />
+                                        <p class="text-warning" id="error_name" style="margin-top: 10px"></p>
                                     </div>
 
                                     <div class="input-item">
                                         <label for="email" class="sr-only required">Email Address</label>
-                                        <input type="email" id="email" placeholder="Email Address" required />
+                                        <input type="email" id="email" name="email_order" placeholder="Email Address" required />
+                                        <p class="text-warning" id="error_email" style="margin-top: 10px"></p>
                                     </div>
 
                                     {{-- <div class="input-item">
@@ -122,8 +124,9 @@
                                     </div> --}}
 
                                     <div class="input-item">
-                                        <label for="street-address" class="sr-only required">Street address</label>
-                                        <input type="text" id="street-address" placeholder="Street address" required />
+                                        <label for="address" class="sr-only required">Street address</label>
+                                        <input type="text" id="address" name="address_order" placeholder="Street address" required />
+                                        <p class="text-warning" id="error_address" style="margin-top: 10px"></p>
                                     </div>
 
                                     {{-- <div class="input-item">
@@ -147,7 +150,8 @@
 
                                     <div class="input-item">
                                         <label for="phone" class="sr-only">Phone</label>
-                                        <input type="text" id="phone" placeholder="Phone" />
+                                        <input type="text" id="phone" name="phone_order" placeholder="Phone" />
+                                        <p class="text-warning" id="error_phone" style="margin-top: 10px"></p>
                                     </div>
 
                                     {{-- <div class="checkout-box-wrap">
@@ -247,99 +251,178 @@
                                         <label for="ordernote" class="sr-only">Order Note</label>
                                         <textarea name="ordernote" id="ordernote" cols="30" rows="3" placeholder="Notes about your order, e.g. special notes for delivery."></textarea>
                                     </div> --}}
-                                </form>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-6 col-xl-5 ml-auto">
+                            <!-- Checkout Page Order Details -->
+                            <div class="order-details-area-wrap">
+                                <h2>Đơn hàng của bạn</h2>
+                                <div class="order-details-table table-responsive">
+                                    <table class="table table-borderless">
+                                        <thead>
+                                            <tr>
+                                                <th style="width: 10% !important">Sản phẩm</th>
+                                                <th>Tổng tiền</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @php
+                                                $total = 0;
+                                            @endphp
+                                            @foreach ($dataproduct as $item)
+                                                @php
+                                                    if($item['product']['sale']==null){
+                                                        $total = $total + $item['product']['price']*$item['qty']; 
+                                                    }else{
+                                                        $total = $total + $item['product']['sale']*$item['qty'];
+                                                    }
+                                                @endphp
+                                                <tr class="cart-item">
+                                                    <td><span class="product-title">{{$item['product']['name']}}({{$item['attribute'][0]['attribute']}}:{{$item['attribute'][0]['attributevalue']}})</span> <span
+                                                    class="product-quantity">&#215;  {{$item['qty']}}</span></td>
+                                                    <td>@if ($item['product']['sale']==null)
+                                                        {{$item['product']['price']*$item['qty']}}
+                                                    @else
+                                                        {{$item['product']['sale']*$item['qty']}}
+                                                    @endif VNĐ</td>
+                                                </tr>
+                                            @endforeach
+                                        </tbody>
+                                        <tfoot>
+                                            <input type="hidden" name="total" value="{{$total}}">
+                                            <tr class="cart-subtotal">
+                                                <th>Thành tiền</th>
+                                                <td>{{$total}} VNĐ</td>
+                                            </tr>
+                                            {{-- @if ($total > 500000)
+                                                <tr class="cart-subtotal">
+                                                    <th>Thành tiền</th>
+                                                    <td>{{$total}} VNĐ</td>
+                                                </tr>
+                                            @else
+                                                <tr class="cart-subtotal">
+                                                    <th>Phí Vận </th>
+                                                    <td>15000 VNĐ</td>
+                                                </tr>
+                                                <tr class="cart-subtotal">
+                                                    <th>Thành tiền</th>
+                                                    <td>{{$total + 15000}} VNĐ</td>
+                                                </tr>
+                                            @endif --}}
+                                            <tr class="shipping">
+                                                <th>Phương thức thanh toán</th>
+                                                <td>
+                                                    <ul class="shipping-method">
+                                                        <li>
+                                                            <div class="custom-control custom-radio">
+                                                                <input type="radio" id="flat_shipping" name="pay_method" class="custom-control-input" value="0" checked />
+                                                                <label class="custom-control-label" for="flat_shipping">COD</label>
+                                                            </div>
+                                                        </li>
+                                                        {{-- <li>
+                                                            <div class="custom-control custom-radio">
+                                                                <input type="radio" id="free_shipping" name="shipping_method" class="custom-control-input" />
+                                                                <label class="custom-control-label" for="free_shipping">Free
+                                                                    Shipping</label>
+                                                            </div>
+                                                        </li> --}}
+                                                        <li>
+                                                            <div class="custom-control custom-radio">
+                                                                <input type="radio" id="cod_shipping" name="pay_method" value="1" class="custom-control-input" />
+                                                                <label class="custom-control-label" for="cod_shipping">Trực tuyến</label>
+                                                            </div>
+                                                        </li>
+                                                    </ul>
+                                                </td>
+                                            </tr>
+                                            {{-- <tr class="final-total">
+                                                <th>Total</th>
+                                                <td><span class="total-amount">$289.93</span></td>
+                                            </tr> --}}
+                                        </tfoot>
+                                    </table>
+                                </div>
+
+                                <div class="order-details-footer">
+                                    {{-- <p>Your personal data will be used to process your order, support your experience throughout
+                                        this website, and for other purposes described in our
+                                        <a href="#" class="text-warning">privacy policy</a>.</p>
+                                    <div class="custom-control custom-checkbox mt-10">
+                                        <input type="checkbox" id="privacy" class="custom-control-input" required />
+                                        <label for="privacy" class="custom-control-label">I have read and agree to the website
+                                            terms
+                                            and conditions</label>
+                                    </div> --}}
+
+                                    <button type="submit" class="btn btn-bordered mt-40">Đặt hàng</button>
+                                </div>
                             </div>
                         </div>
                     </div>
-
-                    <div class="col-lg-6 col-xl-5 ml-auto">
-                        <!-- Checkout Page Order Details -->
-                        <div class="order-details-area-wrap">
-                            <h2>Đơn hàng của bạn</h2>
-
-                            <div class="order-details-table table-responsive">
-                                <table class="table table-borderless">
-                                    <thead>
-                                        <tr>
-                                            <th>Sản phẩm</th>
-                                            <th>Tổng tiền</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr class="cart-item">
-                                            <td><span class="product-title">PIMA POLO SHIRT - COFFEE</span> <span
-                                            class="product-quantity">&#215;  1</span></td>
-                                            <td>150000 VNĐ</td>
-                                        </tr>
-                                        <tr class="cart-item">
-                                            <td><span class="product-title">LINEN COLLAR SHIRT</span> <span
-                                            class="product-quantity">&#215;  1</span></td>
-                                            <td>150000 VNĐ</td>
-                                        </tr>
-                                        <tr class="cart-item">
-                                            <td><span class="product-title">SƠ MI KAKI DENIM</span> <span
-                                            class="product-quantity">&#215;  1</span></td>
-                                            <td>150000 VNĐ</td>
-                                        </tr>
-                                    </tbody>
-                                    <tfoot>
-                                        <tr class="cart-subtotal">
-                                            <th>Thành tiền</th>
-                                            <td>450000 VNĐ</td>
-                                        </tr>
-                                        <tr class="shipping">
-                                            <th>Phương thức thanh toán</th>
-                                            <td>
-                                                <ul class="shipping-method">
-                                                    <li>
-                                                        <div class="custom-control custom-radio">
-                                                            <input type="radio" id="flat_shipping" name="shipping_method" class="custom-control-input" checked />
-                                                            <label class="custom-control-label" for="flat_shipping">COD</label>
-                                                        </div>
-                                                    </li>
-                                                    {{-- <li>
-                                                        <div class="custom-control custom-radio">
-                                                            <input type="radio" id="free_shipping" name="shipping_method" class="custom-control-input" />
-                                                            <label class="custom-control-label" for="free_shipping">Free
-                                                                Shipping</label>
-                                                        </div>
-                                                    </li> --}}
-                                                    <li>
-                                                        <div class="custom-control custom-radio">
-                                                            <input type="radio" id="cod_shipping" name="shipping_method" class="custom-control-input" />
-                                                            <label class="custom-control-label" for="cod_shipping">Trực tuyến</label>
-                                                        </div>
-                                                    </li>
-                                                </ul>
-                                            </td>
-                                        </tr>
-                                        {{-- <tr class="final-total">
-                                            <th>Total</th>
-                                            <td><span class="total-amount">$289.93</span></td>
-                                        </tr> --}}
-                                    </tfoot>
-                                </table>
-                            </div>
-
-                            <div class="order-details-footer">
-                                {{-- <p>Your personal data will be used to process your order, support your experience throughout
-                                    this website, and for other purposes described in our
-                                    <a href="#" class="text-warning">privacy policy</a>.</p>
-                                <div class="custom-control custom-checkbox mt-10">
-                                    <input type="checkbox" id="privacy" class="custom-control-input" required />
-                                    <label for="privacy" class="custom-control-label">I have read and agree to the website
-                                        terms
-                                        and conditions</label>
-                                </div> --}}
-
-                                <button class="btn btn-bordered mt-40">Đặt hàng</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                </form>
             </div>
         </div>
     </div>
     <!--== End Page Content Wrapper ==-->
 
+@endsection
+@section('script')
+<script>
+    $(document).ready(function(){
+        $('#order_form').on('submit',function(event){
+            event.preventDefault(); 
+            $('#error_name').html('');
+            $('#error_email').html('');
+            $('#error_address').html('');
+            $('#error_phone').html('');
+            var check = 0;
+            if($('#name').val()==''){
+                $('#error_name').html('Vui lòng nhập họ tên');
+                check = 1;
+            }
+            if($('#email').val()==''){
+                $('#error_email').html('Vui lòng nhập địa chỉ email');
+                check = 1;
+            }else{
+                if(!/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test($('#email').val())){
+                    $('#error_email').html('Email không đúng định dạng');
+                    check = 1;
+                }
+            }
+            if($('#address').val()==''){
+                $('#error_adress').html('Vui lòng nhập địa chỉ nhận hàng');
+                check = 1;
+            }
+            if($('#phone').val()==''){
+                $('#error_phone').html('Vui lòng nhập số điện thoại');
+                check = 1;
+            }else{
+                if(!/((09|03|07|08|05)+([0-9]{8})\b)/g.test($('#phone').val())){
+                    $('#error_phone').html('Số điện thoại không đúng');
+                    check = 1;
+                }
+            }
+            if(check==0){
+                $.ajax({
+                url: "{{route('order')}}",
+                method:"POST",
+                data:new FormData(this),
+                contentType: false,
+                cache: false,
+                processData: false,
+                dataType:"json",
+                success:function(data)
+                    {  
+                        if(data.success){
+                            window.location.href = "thanks";
+                        }
+                        
+                    }
+                });
+            }
+        });
+    });
+</script>
 @endsection

@@ -174,10 +174,9 @@
                                     </tr> --}}
                                 {{-- </table> --}}
                             </div>
-
-                            <div class="proceed-checkout-btn">
+                            <div class="proceed-checkout-btn" id="btn_order">
                                 {{-- style="pointer-events: none;" --}}
-                                <a href="{{URL::to('/checkout')}}" class="btn btn-brand d-block">Đặt hàng</a>
+                                {{-- <a href="{{URL::to('/order')}}" class="btn btn-brand d-block">Đặt hàng</a> --}}
                             </div>
                         </div>
                     </div>
@@ -445,8 +444,13 @@
                         }
                         html2 += '</tr>'
                     html2 += '</table>';
+                    var html3 = '';
+                    if(number>0){
+                        html3 += '<a href="{{URL::to("/order")}}" class="btn btn-brand d-block">Đặt hàng</a>'
+                    }
                     $('#datacart').html(html);
                     $('#datatotal').html(html2);
+                    $('#btn_order').html(html3);
                     $('#cart-total').html(number);
                     inputqty();
                 }

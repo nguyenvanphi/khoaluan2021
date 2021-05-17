@@ -21,6 +21,7 @@ class DatabaseSeeder extends Seeder
         $this->call(usersSeeder::class);
         $this->call(attributesSeeder::class);
         $this->call(attributevaluesSeeder::class);
+        $this->call(statusordersSeeder::class);
     }
 }
 class rolesSeeder extends Seeder{
@@ -164,6 +165,18 @@ class attributevaluesSeeder extends Seeder{
             ['attribute_id' => '1','product_id'=>'13','value'=>'M'],
             ['attribute_id' => '1','product_id'=>'13','value'=>'L'],
             ['attribute_id' => '1','product_id'=>'13','value'=>'XL'],
+        ]);
+    }
+}
+class statusordersSeeder extends Seeder{
+    public function run()
+    {
+        DB::table('statusorders')->insert([
+            ['name' => 'Đang chờ'],
+            ['name' => 'Đang vận chuyển'],
+            ['name' => 'Hoàn thành'],
+            ['name' => 'Đã huỷ'],
+            ['name' => 'Giao không thành công'],
         ]);
     }
 }
