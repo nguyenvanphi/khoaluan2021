@@ -6,6 +6,9 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Yajra\DataTables\Facades\DataTables;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
@@ -97,5 +100,18 @@ class UserController extends Controller
         $data = User::findOrFail($id);
         $data->delete();
         return response()->json(['success' => 'Delete Data successfully.']);
+    }
+
+    public function profile(Request $request)
+    {
+        // if($request->hasFile('image')){
+        //     $destination_path = 'public/avatar';
+        //     $image = $request->file('image');
+        //     // lấy name
+        //     // $image_name = $image->getClientOriginalName();
+        //     $image_name = Carbon::now()->timestamp;
+        //     $path = $image->storeAs($destination_path,$image_name);
+        //     $input_images = $image_name;
+        // }
     }
 }

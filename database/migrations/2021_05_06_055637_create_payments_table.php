@@ -25,6 +25,7 @@ class CreatePaymentsTable extends Migration
             $table->string('code_bank');
             $table->dateTime('time');
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
+            $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
         });
     }
 

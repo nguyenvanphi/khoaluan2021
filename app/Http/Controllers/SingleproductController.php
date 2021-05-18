@@ -11,6 +11,9 @@ class SingleproductController extends Controller
 {
     public function index($id)
     {
+        if(session('info_order')){
+            session()->forget('info_order');
+        }
         $product = Products::find($id);
         $imagesproduct = DB::table('imagesproducts')
             ->select('*')

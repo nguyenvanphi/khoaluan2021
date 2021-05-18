@@ -104,7 +104,15 @@
                         </style>
                         <?php if(Auth::check()){?>
                             <div class="dropdown">
-                                <a href="{{URL::to('/profile')}}" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="{{asset('public/frontend/images/admin.jpg')}}" alt="" class="user-avatar-header"></a>
+                                <a href="{{URL::to('/profile')}}" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    @if (Auth::user()->avatar==null)
+                                        <img src="{{asset('public/frontend/images/default-avatar.png')}}" alt="" class="user-avatar-header">
+                                    @else
+                                        <img src="{{ URL::to('/') }}/public/storage/avatar/@php
+                                        echo Auth::user()->avatar
+                                    @endphp" alt="" class="user-avatar-header">
+                                    @endif
+                                </a>
                                 {{-- <i style="font-size: 25px" class="fa fa-user dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i> --}}
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                     <a class="dropdown-item" href="{{URL::to('/profile')}}"><i class="fa fa-user"> </i> Tài khoản của tôi</a>

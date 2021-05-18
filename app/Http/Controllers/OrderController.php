@@ -110,9 +110,27 @@ class OrderController extends Controller
             );
             session()->put('info_order',$info_order);
             session()->forget('cart');
-            return response()->json(['success' => 'Add order successfully.']);
+            return response()->json(['success' => 0]);
         }else{
-            dd('test');
+            $total = 0;
+            foreach($cart as $item){
+                $product = Products::find($item['id']);
+                if($product['sale']==null){
+                    $total = $total + $product['price']*$item['qty'];
+                }else{
+                    $total = $total + $product['sale']*$item['qty'];
+                }
+            }
+            $info_order = array();
+            $info_order = array(
+                'name' => $request->name_order,
+                'email' => $request->email_order,
+                'phone' => $request->phone_order,
+                'address' => $request->address_order,
+                'total' => $total
+            );
+            session()->put('info_order',$info_order);
+            return response()->json(['success' => 1]);
         }
     }
 

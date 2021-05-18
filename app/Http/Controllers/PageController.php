@@ -48,6 +48,9 @@ class PageController extends Controller
     public function profile(){
         return view('frontend.pages.profile');
     }
+    public function vnpay(){
+        return view('frontend.pages.vnpay.index');
+    }
     // Admin
     public function dashboard(){
         return view('backend.pages.dashboard');

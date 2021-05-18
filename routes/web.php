@@ -45,9 +45,14 @@ Route::middleware('auth')->group(function () {
     Route::get('logout', 'AuthController@logout');
     Route::get('/history-orders', 'PageController@history');
     Route::get('/profile', 'PageController@profile');
+    Route::post('/profile', 'UserController@profile')->name('profile');
     Route::get('/order', 'OrderController@index')->middleware('CheckCart');
     Route::post('/order','OrderController@store')->name('order');
     Route::get('/thanks','OrderController@thanks')->middleware('CheckOrder')->name('thanks');
+    Route::get('/vnpay', 'PageController@vnpay')->middleware('CheckInfo')->name('vnpay');
+    Route::get('/back','PaymentsController@back');
+    Route::post('/payment','PaymentsController@index')->name('payment');
+    Route::get('/vnpayreturn','PaymentsController@store')->name('vnpayreturn');
 });
 Route::middleware('CheckLoginAdmin')->group(function () {
     

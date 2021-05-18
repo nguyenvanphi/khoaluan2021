@@ -63,5 +63,6 @@ class Kernel extends HttpKernel
         'CheckLoginAdmin'=>\App\Http\Middleware\CheckLoginAdmin::class,
         'CheckCart'=>\App\Http\Middleware\CheckCart::class,
         'CheckOrder'=>\App\Http\Middleware\CheckOrder::class,
+        'CheckInfo'=>\App\Http\Middleware\CheckInfo::class,
     ];
 }

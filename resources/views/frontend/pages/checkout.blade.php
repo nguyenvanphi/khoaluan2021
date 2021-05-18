@@ -415,8 +415,10 @@
                 dataType:"json",
                 success:function(data)
                     {  
-                        if(data.success){
+                        if(data.success == 0){
                             window.location.href = "thanks";
+                        }else{
+                            window.location.href = "vnpay";
                         }
                         
                     }
