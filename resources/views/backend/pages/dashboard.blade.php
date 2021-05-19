@@ -49,7 +49,7 @@
                             </div>
                         </div>
                         <h4 class="mb-0">
-                            <span class="count">1046</span>
+                            <span class="count">{{$member}}</span>
                         </h4>
                         <p class="text-light">Members</p>
 
@@ -79,7 +79,7 @@
                             </div>
                         </div>
                         <h4 class="mb-0">
-                            <span class="count">1046</span>
+                            <span class="count">{{$product}}</span>
                         </h4>
                         <p class="text-light">Products</p>
 
@@ -108,7 +108,7 @@
                             </div>
                         </div>
                         <h4 class="mb-0">
-                            <span class="count">1046</span>
+                            <span class="count">{{$category}}</span>
                         </h4>
                         <p class="text-light">Category Product</p>
 
@@ -137,7 +137,7 @@
                             </div>
                         </div>
                         <h4 class="mb-0">
-                            <span class="count">1046</span>
+                            <span class="count">{{$order}}</span>
                         </h4>
                         <p class="text-light">Orders</p>
                         <div class="chart-wrapper px-3" style="height:70px;" height="70">

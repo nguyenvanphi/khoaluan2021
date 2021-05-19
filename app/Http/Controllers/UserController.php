@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -37,10 +38,12 @@ class UserController extends Controller
     {
         $rules = array(
             'name' =>  'required',
-            'email'        =>  'required|email',
+            'email'        =>  'required|email|unique:users',
+            'phone' => 'required|numeric|min:10|max:11',
+            'address' => 'required|string'
         );
         if($request->phone!=''){
-            $rules['phone'] = 'min:9|max:11';
+            $rules['phone'] = 'min:10|max:11';
         }
         $error = Validator::make($request->all(), $rules);
 
@@ -73,10 +76,12 @@ class UserController extends Controller
         $rules = array(
             'id'        =>  'required',
             'name' =>  'required',
-            'email'        =>  'required|email',
+            'email'        =>  'required|email|unique:users',
+            'phone' => 'required|numeric|min:10|max:11',
+            'address' => 'required|string'
         );
         if($request->phone!=''){
-            $rules['phone'] = 'min:9|max:11';
+            $rules['phone'] = 'min:10|max:11';
         }
         $error = Validator::make($request->all(), $rules);
 
@@ -146,6 +151,25 @@ class UserController extends Controller
                 }
                 return response()->json(['success' => 3]);
             }
+        }
+    }
+
+    public function resetpassword(Request $request){
+        $check = DB::table('users')
+            ->select('users.password')
+            ->where('id','=',Auth::user()->id)->first();
+        if(Hash::check($request->password,$check->password)){
+            if($request->password==$request->newpassword){
+                return response()->json(['success' => 2]);
+            }else{
+                $data = array(
+                    'password' => bcrypt($request->newpassword),
+                );
+                User::whereId(Auth::user()->id)->update($data);
+                return response()->json(['success' => 3]);
+            }
+        }else{
+            return response()->json(['success' => 1]);
         }
     }
 }

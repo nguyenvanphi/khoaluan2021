@@ -150,7 +150,7 @@
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary closeform" data-dismiss="modal">Close</button>
-                                <button type="submit" class="btn btn-info">Cập nhật</button>
+                                <button type="submit" class="btn btn-success">Thêm mới</button>
                             </div>
                         </form>
                     </div>
@@ -298,7 +298,7 @@
             $('#adduser #error_name').html('');
             $('#adduser #error_email').html('');
             $('#adduser #error_phone').html('');
-            $('#adduser #error_address').html('');
+            $('#adduser #error_adress').html('');
             $('#adduser #success').html('');
             $('#adduser #success').css('display','none');
             $('#adduser #error').html('');
@@ -313,7 +313,7 @@
             $('#adduser #error_name').html('');
             $('#adduser #error_email').html('');
             $('#adduser #error_phone').html('');
-            $('#adduser #error_address').html('');
+            $('#adduser #error_adress').html('');
             $('#adduser #success').html('');
             $('#adduser #success').css('display','none');
             $('#adduser #error').html('');
@@ -339,7 +339,7 @@
                             $('#adduser #error_name').html(data.errors['name']);
                         }
                         if(data.errors['address']!=''){
-                            $('#adduser #error_address').html(data.errors['address']);
+                            $('#adduser #error_adress').html(data.errors['address']);
                         }
                     }
                     if(data.success)

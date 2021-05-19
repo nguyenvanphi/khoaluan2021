@@ -102,6 +102,13 @@
                             }
 
                         </style>
+                        
+                        
+                        @if (Auth::user()->role_id==1)
+                            <a href="{{URL::to('/dashboard')}}" style="color: dimgrey; margin-right: 20px;">
+                                <i class="fa fa-dashboard" style="font-size: 25px;"></i>
+                            </a>
+                        @endif
                         <?php if(Auth::check()){?>
                             <div class="dropdown">
                                 <a href="{{URL::to('/profile')}}" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -116,7 +123,8 @@
                                 {{-- <i style="font-size: 25px" class="fa fa-user dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i> --}}
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                     <a class="dropdown-item" href="{{URL::to('/profile')}}"><i class="fa fa-user"> </i> Tài khoản của tôi</a>
-                                    <a class="dropdown-item" href="{{URL::to('/history-orders')}}"><i class="fa fa-clipboard"></i></i> Lịch sử mua hàng</a>
+                                    <a class="dropdown-item" href="{{URL::to('/history-orders')}}"><i class="fa fa-clipboard"></i> Lịch sử mua hàng</a>
+                                    <a class="dropdown-item" href="{{URL::to('/resetpassword')}}"><i class="fa fa-key"></i> Đổi mật khẩu</a>
                                     <a class="dropdown-item" href="{{URL::to('/logout')}}"><i class="fa fa-sign-out"></i> Đăng xuất</a>
                                 </div>
                             </div>

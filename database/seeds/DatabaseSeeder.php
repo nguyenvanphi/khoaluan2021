@@ -22,6 +22,7 @@ class DatabaseSeeder extends Seeder
         $this->call(attributesSeeder::class);
         $this->call(attributevaluesSeeder::class);
         $this->call(statusordersSeeder::class);
+        $this->call(infosSeeder::class);
     }
 }
 class rolesSeeder extends Seeder{
@@ -177,6 +178,16 @@ class statusordersSeeder extends Seeder{
             ['name' => 'Hoàn thành'],
             ['name' => 'Đã huỷ'],
             ['name' => 'Giao không thành công'],
+        ]);
+    }
+}
+class infosSeeder extends Seeder{
+    public function run()
+    {
+        DB::table('infos')->insert([
+            ['name'=>'Nguyễn Văn Phi','web_name'=>'The Gmen','address'=>'95 Mai Thúc Loan, Thành phố Huế',
+            'phone'=>'0395745039','email'=>'gmenshop@gmail.com','link_fb'=>'https://www.facebook.com/Thegmenstore/',
+            'link_ytb'=>'https://www.youtube.com/channel/UC08RVXMZgiLs3IaV5wj-yIg','link_in'=>'https://www.instagram.com/the_gmen_store/'],
         ]);
     }
 }

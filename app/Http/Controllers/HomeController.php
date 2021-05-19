@@ -34,4 +34,21 @@ class HomeController extends Controller
                     ->get();
         return view('frontend.home',['products_sale'=>$data_sale,'products_hot'=>$data_hot]);
     }
+
+    public function dashboard(){
+        $member = DB::table('users')
+            ->select('users.*')
+            ->get();
+        $product = DB::table('products')
+            ->select('products.*')
+            ->get();
+        $category = DB::table('categoryproducts')
+            ->select('categoryproducts.*')
+            ->get();
+        $order = DB::table('orders')
+            ->select('orders.*')
+            ->get();
+        return view('backend.pages.dashboard',['member'=>count($member),'product'=>count($product),
+            'category'=>count($category),'order'=>count($order)]);
+    }
 }

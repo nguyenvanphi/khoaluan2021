@@ -72,9 +72,25 @@
                         <div class="col-12">
                             <div class="contact-form-content">
                                 <h2>Get In Touch</h2>
-
                                 <div class="contact-form-wrap">
-                                    <form action="//whizthemes.com/mail-php/raju/gariongso/mail.php" method="post" id="contact-form">
+                                    <form action="{{url('sendemail')}}" method="post" id="contact-form">
+                                        @if (count($errors) > 0)
+                                        <div class="alert alert-danger">
+                                            <button type="button" class="close" data-dismiss="alert">×</button>
+                                            <ul>
+                                                @foreach ($errors->all() as $error)
+                                                    <li>{{ $error }}</li>
+                                                @endforeach
+                                            </ul>
+                                        </div>
+                                        @endif
+                                        @if ($message = Session::get('success'))
+                                            <div class="alert alert-success alert-block">
+                                                <button type="button" class="close" data-dismiss="alert">×</button>
+                                                    <strong>{{ $message }}</strong>
+                                            </div>
+                                        @endif
+                                        {{ csrf_field() }}
                                         <div class="contact-form-inner">
                                             <div class="row">
                                                 <div class="col-md-6">
@@ -87,14 +103,14 @@
                                                 <div class="col-md-6">
                                                     <div class="input-item">
                                                         <label class="sr-only" for="email">email</label>
-                                                        <input type="email" name="email" id="email" placeholder="Email" required />
+                                                        <input type="email" name="email" id="email" placeholder="Email"  required/>
                                                     </div>
                                                 </div>
 
                                                 <div class="col-12">
                                                     <div class="input-item">
                                                         <label class="sr-only" for="subject">subject</label>
-                                                        <input type="text" name="subject" id="subject" placeholder="Subject" required />
+                                                        <input type="text" name="subject" id="subject" placeholder="Subject"  required/>
                                                     </div>
                                                 </div>
 
@@ -107,14 +123,12 @@
 
                                                 <div class="col-12">
                                                     <div class="input-item">
-                                                        <button class="btn btn-brand">Send a Message</button>
+                                                        <button type="submit" class="btn btn-brand">Send a Message</button>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
 
-                                        <!-- Form Submission Notification -->
-                                        <div class="form-message"></div>
                                     </form>
                                 </div>
                             </div>

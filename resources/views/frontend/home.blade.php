@@ -46,7 +46,7 @@
                             </div>
                             <div class="call-to-action-item__info">
                                 <h3>Giao hàng miễn phí</h3>
-                                <p>Cung cấp giao hàng tận nhà miễn phí cho tất cả các đơn hàng trên 500K</p>
+                                <p>Cung cấp giao hàng tận nhà miễn phí cho tất cả các đơn hàng</p>
                             </div>
                         </div>
                     </div>
