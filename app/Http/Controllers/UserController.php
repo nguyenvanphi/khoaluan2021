@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Yajra\DataTables\Facades\DataTables;
+use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
@@ -104,14 +105,47 @@ class UserController extends Controller
 
     public function profile(Request $request)
     {
-        // if($request->hasFile('image')){
-        //     $destination_path = 'public/avatar';
-        //     $image = $request->file('image');
-        //     // lấy name
-        //     // $image_name = $image->getClientOriginalName();
-        //     $image_name = Carbon::now()->timestamp;
-        //     $path = $image->storeAs($destination_path,$image_name);
-        //     $input_images = $image_name;
-        // }
+        if($request->hasFile('image')){
+            $check_email = DB::table('users')
+                    ->where([['id','<>',Auth::user()->id],['email','=', $request->email]])->first();
+            if($check_email){
+                return response()->json(['success' => 1]);
+            }else{
+                $destination_path = 'public/avatar';
+                $image = $request->file('image');
+                $image_name = Carbon::now()->timestamp;
+                $path = $image->storeAs($destination_path,$image_name);
+                $data = array(
+                    'user_name' => $request->name,
+                    'email' => $request->email,
+                    'phone' => $request->phone,
+                    'address' => $request->address,
+                    'avatar' => $image_name
+                );
+                $check = User::whereId(Auth::user()->id)->update($data);  
+                if(!$check){
+                    return response()->json(['success' => 2]);
+                }
+                return response()->json(['success' => 4,'images'=>$image_name]);
+            }
+        }else{
+            $check_email = DB::table('users')
+                    ->where([['id','<>',Auth::user()->id],['email','=', $request->email]])->first();
+            if($check_email){
+                return response()->json(['success' => 1]);
+            }else{
+                $data = array(
+                    'user_name' => $request->name,
+                    'email' => $request->email,
+                    'phone' => $request->phone,
+                    'address' => $request->address 
+                );
+                $check = User::whereId(Auth::user()->id)->update($data);  
+                if(!$check){
+                    return response()->json(['success' => 2]);
+                }
+                return response()->json(['success' => 3]);
+            }
+        }
     }
 }

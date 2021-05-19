@@ -81,8 +81,8 @@ class usersSeeder extends Seeder{
     {
         $password = bcrypt('016957450392010');
         DB::table('users')->insert([
-            ['id' => '1','user_name' => 'admin','email' => 'nguyenvanphi31@gmail.com','phone' => '0395745039','address'=> 'Huế, Việt Nam','password' => $password,'role_id' => '1'],
-            ['id' => '2','user_name' => 'user','email' => '17T1021197@husc.edu.vn','phone' => '0395745039','address'=> 'Huế, Việt Nam','password' => $password,'role_id' => '2'],
+            ['id' => '1','user_name' => 'admin','email' => 'nguyenvanphi31@gmail.com','phone' => '0395745039','address'=> 'Huế, Việt Nam','avatar'=>'1621353765','password' => $password,'role_id' => '1'],
+            ['id' => '2','user_name' => 'user','email' => '17T1021197@husc.edu.vn','phone' => '0395745039','address'=> 'Huế, Việt Nam','avatar'=>null,'password' => $password,'role_id' => '2'],
         ]);
     }
 }

@@ -54,7 +54,7 @@
                         <form action="{{URL::to('/search-product')}}" method="GET" class="search-form" style="max-width: 300px; height: 40px;">
                             {{ csrf_field() }}
                             <input class="form-control mr-sm-2" type="text" name="search_product" placeholder="Tìm kiếm sản phẩm" value="<?php if(!empty($search)) echo $search; ?>" aria-label="Search" style="border-radius: unset;">
-                            <button type="submit" class="search-trigger" style="position: absolute;top: 7px;left: 50%;"><i class="fa fa-search"></i></button>
+                            <button type="submit" class="search-trigger" id="btn_search_product" style="position: absolute;top: 7px;left: 50%;"><i class="fa fa-search"></i></button>
                         </form>
                     </div>
                     {{-- <div class="col-sm-6">
@@ -202,3 +202,14 @@
 <!--== End Page Content Wrapper ==-->
 
  @endsection
+{{-- @section('script')
+<script>
+    $(document).ready(function(){
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+    });
+</script>
+@endsection --}}

@@ -14,21 +14,22 @@
                         <form style="width: 80%" id="form_profile" action="" method="POST" enctype="multipart/form-data">
                             {{ csrf_field() }}
                             <div class="form-fields">
-                                <div class="form-group" style="text-align: center">
+                                <div class="form-group" style="text-align: center" id="avatar_profile">
                                     @if (Auth::user()->avatar==null)
                                         <img style="border-radius: 50%" src="{{asset('public/frontend/images/default-avatar.png')}}" alt="">
                                     @else
                                         <img style="border-radius: 50%" src="{{ URL::to('/') }}/public/storage/avatar/@php
                                         echo Auth::user()->avatar
-                                    @endphp" alt="" class="user-avatar-header">
+                                    @endphp" alt="">
                                     @endif
                                 </div>
                                 <div class="form-group">
-                                    <div class="custom-file ">
+                                    <input type="file" name="image" class="form-control" id="validatedCustomFile" style="padding: 0.5%;">
+                                    {{-- <div class="custom-file ">
                                         <input type="file" name="image" class="custom-file-input" id="validatedCustomFile">
-                                        <label class="custom-file-label" for="validatedCustomFile">Chọn ảnh đại diện</label>
+                                        <label class="custom-file-label" for="validatedCustomFile">Chọn ảnh đại diện</label> --}}
                                         {{-- <div class="invalid-feedback">Example invalid custom file feedback</div> --}}
-                                    </div>
+                                    {{-- </div> --}}
                                 </div>
                                 </div>
                                 <div class="form-group">
@@ -73,6 +74,9 @@
 @section('script')
 <script>
     $(document).ready(function(){
+        toastr.options = {
+            timeOut          : 650, //default timeout,
+        };
         $('#form_profile').on('submit',function(event){
             event.preventDefault(); 
             $('#error_name').html('');
@@ -117,7 +121,29 @@
                 dataType:"json",
                 success:function(data)
                     {  
-
+                        // document.getElementById("form_profile").reset();
+                        if(data.success==1){
+                            $('#error_email').html('Email đã được đăng ký');
+                        }
+                        if(data.success==2){
+                            toastr.warning("Lỗi hệ thống. cập nhật không thành công !");
+                        }
+                        if(data.success==3){
+                            toastr.success("Cập nhật thông tin thành công !");
+                        }
+                        if(data.success==4){
+                            var html = '';
+                            html += '<img src="{{ URL::to("/") }}/public/storage/avatar/'
+                            html += data.images
+                            html +='" alt="" class="user-avatar-header" />'
+                            $('#dropdownMenuButton').html(html);
+                            var html2 ='';
+                            html2 += '<img style="border-radius: 50%" src="{{ URL::to("/") }}/public/storage/avatar/'
+                            html2 += data.images
+                            html2 +='" alt=""/>'
+                            $('#avatar_profile').html(html2);
+                            toastr.success("Cập nhật thông tin thành công !");
+                        }
                     }
                 });
             }

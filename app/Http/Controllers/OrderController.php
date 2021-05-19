@@ -207,4 +207,32 @@ class OrderController extends Controller
         session()->forget('order');
         return view('frontend.pages.thanks',['info_order'=>$info_order,'order'=>$order]);
     }
+
+    public function history(){
+        $order = DB::table('orders')
+        ->Join('statusorders','orders.status_order_id','=','statusorders.id')
+        ->select('orders.*','statusorders.name as name')
+        ->Where('user_id','=',Auth::user()->id)
+        ->paginate(5);
+        $from = $order->firstItem();
+        $to = $order->lastItem();
+        return view('frontend.pages.historyorders')->with(compact('order','from','to'));
+    }
+
+    public function detailhistory($id){
+        $order = DB::table('orders')
+        ->Join('statusorders','orders.status_order_id','=','statusorders.id')
+        ->select('orders.*','statusorders.name as name')
+        ->Where([['user_id','=',Auth::user()->id],['orders.id','=',$id]])
+        ->get();
+        $products = DB::table('orders')
+        ->Join('orderdetails','orders.id','=','orderdetails.order_id')
+        ->Join('products','orderdetails.product_id','=','products.id')
+        ->Join('orderdetails_attributes','orderdetails.id','=','orderdetails_attributes.orderdetails_id')
+        ->Join('attributes','orderdetails_attributes.attribute_id','=','attributes.id')
+        ->select('orderdetails.*','products.name as name_product','orderdetails_attributes.value as value','attributes.name as name_attr','products.images')
+        ->Where([['orders.user_id','=',Auth::user()->id],['orders.id','=',$id]])
+        ->get();
+        return view('frontend.pages.detailsorder',['order'=>$order,'products'=>$products]);
+    }
 }

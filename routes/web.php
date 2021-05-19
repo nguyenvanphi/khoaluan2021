@@ -43,7 +43,8 @@ Route::post('/updatecart', 'CartController@updatecart')->name('updatecart');
 
 Route::middleware('auth')->group(function () {
     Route::get('logout', 'AuthController@logout');
-    Route::get('/history-orders', 'PageController@history');
+    Route::get('/history-orders', 'OrderController@history');
+    Route::get('/detailsorder/{id}', 'OrderController@detailhistory');
     Route::get('/profile', 'PageController@profile');
     Route::post('/profile', 'UserController@profile')->name('profile');
     Route::get('/order', 'OrderController@index')->middleware('CheckCart');
