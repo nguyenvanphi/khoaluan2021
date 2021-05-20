@@ -5,8 +5,8 @@
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-menu" aria-controls="main-menu" aria-expanded="false" aria-label="Toggle navigation">
                 <i class="fa fa-bars"></i>
             </button>
-            <a class="navbar-brand" href="{{URL::to('/dashboard')}}"><img src="{{('public/backend/images/logo.png')}}" alt="Logo"></a>
-            <a class="navbar-brand hidden" href="{{URL::to('/dashboard')}}"><img src="{{('public/backend/images/logo2.png')}}" alt="Logo"></a>
+            <a class="navbar-brand" href="{{URL::to('/dashboard')}}"><img src="{{asset('public/backend/images/logo.png')}}" alt="Logo"></a>
+            <a class="navbar-brand hidden" href="{{URL::to('/dashboard')}}"><img src="{{asset('public/backend/images/logo2.png')}}" alt="Logo"></a>
         </div>
 
         <div id="main-menu" class="main-menu collapse navbar-collapse">
@@ -25,7 +25,7 @@
                     </ul>
                 </li>
                 <li class=" ">
-                    <a href="{{URL::to('/orders')}}"> <i class="menu-icon fa fa-first-order"></i>Đơn hàng </a>
+                    <a href="{{URL::to('/ordersadmin')}}"> <i class="menu-icon fa fa-first-order"></i>Đơn hàng </a>
                 </li>
                 <li class=" ">
                     <a href="{{URL::to('/contacts')}}"> <i class="menu-icon fa fa-address-book"></i>Liên hệ </a>

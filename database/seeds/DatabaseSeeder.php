@@ -49,31 +49,55 @@ class productsSeeder extends Seeder{
     {
         DB::table('products')->insert([
             ['name'=>'WEAVE POLO SHIRT - PINK PASTEL','price'=>'180000','sale'=>'165000','images'=>'1620666112','qty'=>'100','category_product_id'=>'5','is_hot'=>'0',
-                'description'=>'<p>Chất liệu: Cotton Supima</p><p>- Chất vải siêu mịn, siêu nhẹ, siêu thoáng mát, chống nhăn tốt và không gây bết dính da.</p><p>- Thiết kế viền phối trẻ trung, năng động, buổi đi chơi của bạn sẽ trọn vẹn.</p>'],
+                'description'=>'Chất liệu: Cotton Supima
+                - Chất vải siêu mịn, siêu nhẹ, siêu thoáng mát, chống nhăn tốt và không gây bết dính da.
+                - Thiết kế viền phối trẻ trung, năng động, buổi đi chơi của bạn sẽ trọn vẹn.'],
             ['name'=>'DENIM JACKET - LIGHT BLUE','price'=>'780000','sale'=>'615000','images'=>'1620665953','qty'=>'100','category_product_id'=>'4','is_hot'=>'0',
-                'description'=>'<p>- Chất vải Denim được xử lý kỹ càng, chú trọng từng đường may sao cho chiếc áo khoác chắc chắn, bền màu là giữ được form lâu nhất có thể.</p><p>- Dáng áo đứng form tạo nên vẻ trẻ trung, phong cách, vừa giữ ấm tốt, vừa tránh nắng kỹ.</p>'],
+                'description'=>'- Chất vải Denim được xử lý kỹ càng, chú trọng từng đường may sao cho chiếc áo khoác chắc chắn, bền màu là giữ được form lâu nhất có thể.
+                - Dáng áo đứng form tạo nên vẻ trẻ trung, phong cách, vừa giữ ấm tốt, vừa tránh nắng kỹ.'],
             ['name'=>'PIMA POLO SHIRT - COFFEE','price'=>'80000','sale'=>'65000','images'=>'1620666011','qty'=>'100','category_product_id'=>'5','is_hot'=>'0',
-                'description'=>'<p>Chất liệu: Cotton Supima</p><p>- Chất vải siêu mịn, siêu nhẹ, siêu thoáng mát, chống nhăn tốt và không gây bết dính da.</p><p>- Thiết kế viền phối trẻ trung, năng động, buổi đi chơi của bạn sẽ trọn vẹn.</p>'],
+                'description'=>'Chất liệu: Cotton Supima
+                - Chất vải siêu mịn, siêu nhẹ, siêu thoáng mát, chống nhăn tốt và không gây bết dính da.
+                - Thiết kế viền phối trẻ trung, năng động, buổi đi chơi của bạn sẽ trọn vẹn.'],
             ['name'=>'LINEN STAND-UP COLLAR SHIRT','price'=>'180000','sale'=>'165000','images'=>'1620665903','qty'=>'100','category_product_id'=>'3','is_hot'=>'0',
-                'description'=>'<p>Chất liệu: Vải Linen (Đũi)</p><p>- Nhẹ nhàng, mềm mai, thoáng mát, độ co giãn nhẹ.</p><p>- Chất liệu linen cao cấp đã qua xử lý chống co rút, bai nhão.</p>'],
+                'description'=>'Chất liệu: Vải Linen (Đũi)
+                - Nhẹ nhàng, mềm mai, thoáng mát, độ co giãn nhẹ.
+                - Chất liệu linen cao cấp đã qua xử lý chống co rút, bai nhão.'],
             ['name'=>'SƠ MI KAKI DENIM - XANH NHẠT','price'=>'180000','sale'=>'165000','images'=>'1620666058','qty'=>'100','category_product_id'=>'3','is_hot'=>'0',
-                'description'=>'<p>Chất liệu: Vải Linen (Đũi)</p><p>- Nhẹ nhàng, mềm mai, thoáng mát, độ co giãn nhẹ.</p><p>- Chất liệu linen cao cấp đã qua xử lý chống co rút, bai nhão.</p>'],
+                'description'=>'Chất liệu: Vải Linen (Đũi)
+                - Nhẹ nhàng, mềm mai, thoáng mát, độ co giãn nhẹ.
+                - Chất liệu linen cao cấp đã qua xử lý chống co rút, bai nhão.'],
             ['name'=>'PORTOFINO LINEN SHIRT - DARK GREEN','price'=>'165000','sale'=>null,'images'=>'1620666568','qty'=>'100','category_product_id'=>'3','is_hot'=>'1',
-                'description'=>'<p>Chất liệu: Vải Linen (Đũi)</p><p>- Nhẹ nhàng, mềm mai, thoáng mát, độ co giãn nhẹ.</p><p>- Chất liệu linen cao cấp đã qua xử lý chống co rút, bai nhão.</p>'],
+                'description'=>'Chất liệu: Vải Linen (Đũi)
+                - Nhẹ nhàng, mềm mai, thoáng mát, độ co giãn nhẹ.
+                - Chất liệu linen cao cấp đã qua xử lý chống co rút, bai nhão.'],
             ['name'=>'PLAID FLANNEL SHIRT - BLUE','price'=>'615000','sale'=>null,'images'=>'1620666643','qty'=>'100','category_product_id'=>'3','is_hot'=>'1',
-                'description'=>'<p>Chất liệu: Vải Linen (Đũi)</p><p>- Nhẹ nhàng, mềm mai, thoáng mát, độ co giãn nhẹ.</p><p>- Chất liệu linen cao cấp đã qua xử lý chống co rút, bai nhão.</p>'],
+                'description'=>'Chất liệu: Vải Linen (Đũi)
+                - Nhẹ nhàng, mềm mai, thoáng mát, độ co giãn nhẹ.
+                - Chất liệu linen cao cấp đã qua xử lý chống co rút, bai nhão.'],
             ['name'=>'SLIM FIT POLO SHIRT - NAVY BLUE','price'=>'65000','sale'=>null,'images'=>'1620666495','qty'=>'100','category_product_id'=>'5','is_hot'=>'1',
-                'description'=>'<p>Chất liệu: Cotton Supima</p><p>- Chất vải siêu mịn, siêu nhẹ, siêu thoáng mát, chống nhăn tốt và không gây bết dính da.</p><p>- Thiết kế viền phối trẻ trung, năng động, buổi đi chơi của bạn sẽ trọn vẹn.</p>'],
+                'description'=>'Chất liệu: Cotton Supima
+                - Chất vải siêu mịn, siêu nhẹ, siêu thoáng mát, chống nhăn tốt và không gây bết dính da.
+                - Thiết kế viền phối trẻ trung, năng động, buổi đi chơi của bạn sẽ trọn vẹn.'],
             ['name'=>'CONTRAST NECKLINE TSHIRT - ORANGE','price'=>'165000','sale'=>null,'images'=>'1620666589','qty'=>'100','category_product_id'=>'5','is_hot'=>'1',
-                'description'=>'<p>Chất liệu: Cotton Supima</p><p>- Chất vải siêu mịn, siêu nhẹ, siêu thoáng mát, chống nhăn tốt và không gây bết dính da.</p><p>- Thiết kế viền phối trẻ trung, năng động, buổi đi chơi của bạn sẽ trọn vẹn.</p>'],
+                'description'=>'Chất liệu: Cotton Supima
+                - Chất vải siêu mịn, siêu nhẹ, siêu thoáng mát, chống nhăn tốt và không gây bết dính da.
+                - Thiết kế viền phối trẻ trung, năng động, buổi đi chơi của bạn sẽ trọn vẹn.'],
             ['name'=>'PORTOFINO LINEN SHIRT - NAVY BLUE','price'=>'165000','sale'=>null,'images'=>'1620666545','qty'=>'100','category_product_id'=>'3','is_hot'=>'1',
-                'description'=>'<p>Chất liệu: Vải Linen (Đũi)</p><p>- Nhẹ nhàng, mềm mai, thoáng mát, độ co giãn nhẹ.</p><p>- Chất liệu linen cao cấp đã qua xử lý chống co rút, bai nhão.</p>'],
+                'description'=>'Chất liệu: Vải Linen (Đũi)
+                - Nhẹ nhàng, mềm mai, thoáng mát, độ co giãn nhẹ.
+                - Chất liệu linen cao cấp đã qua xử lý chống co rút, bai nhão.'],
             ['name'=>'BERMUDA SHORT - BLACK','price'=>'180000','sale'=>null,'images'=>'1620667097','qty'=>'100','category_product_id'=>'6','is_hot'=>'0',
-                'description'=>'<p>Mẫu quần short Bermuda được làm từ chất liệu làm mát, dòng vải kaki gió với thiết kế ôm tự nhiên, mang đến cho bạn trải nghiệm thoải mái vượt trội.</p><p>- Sợi vải siêu mảnh, nhanh chóng khô mồ hôi ngay tức thì.</p><p>- Thoáng khí tuyệt vời, không còn cảm giác ngột ngạt và mùi mồ hôi khó chịu.</p>'],
+                'description'=>'Mẫu quần short Bermuda được làm từ chất liệu làm mát, dòng vải kaki gió với thiết kế ôm tự nhiên, mang đến cho bạn trải nghiệm thoải mái vượt trội.
+                - Sợi vải siêu mảnh, nhanh chóng khô mồ hôi ngay tức thì.
+                - Thoáng khí tuyệt vời, không còn cảm giác ngột ngạt và mùi mồ hôi khó chịu.'],
             ['name'=>'ÁO VESTON HỌA TIẾT - XÁM CARO','price'=>'1100000','sale'=>null,'images'=>'1620667140','qty'=>'100','category_product_id'=>'1','is_hot'=>'0',
-                'description'=>'<p>Chất liệu: 70% polyester, 30% rayon.</p><p>Đặc tính: Mềm mịn, có độ rũ, thấm hút mồ hôi rất tốt, bền màu cao.</p>'],
+                'description'=>'Chất liệu: 70% polyester, 30% rayon.
+                Đặc tính: Mềm mịn, có độ rũ, thấm hút mồ hôi rất tốt, bền màu cao.'],
             ['name'=>'QUẦN KAKI MUSLAND - XANH NAVY','price'=>'380000','sale'=>null,'images'=>'1620667161','qty'=>'100','category_product_id'=>'2','is_hot'=>'0',
-                'description'=>'<p>- Chất liệu: 98% cotton, 2% Spandex</p><p>- Co giãn, hút ẩm tốt và thấm hút mồ hôi.</p><p>- Chất vải sờ mịn không bai, không nhăn, không xù.</p>'],
+                'description'=>'- Chất liệu: 98% cotton, 2% Spandex
+                - Co giãn, hút ẩm tốt và thấm hút mồ hôi.
+                - Chất vải sờ mịn không bai, không nhăn, không xù.'],
         ]);
     }
 }

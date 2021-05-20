@@ -101,7 +101,7 @@
                                             $product->description = explode('</p>', $product->description);
                                         @endphp
                                         @foreach ($product->description as $description)
-                                                <p>{{$description}}</p>
+                                                <p>@php echo nl2br($description) @endphp</p>
                                         @endforeach
                                         <form action="" method="POST" id="add-cart">
                                             {{ csrf_field() }}

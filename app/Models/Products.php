@@ -10,6 +10,6 @@ class Products extends Model
     // các trường không được thêm dử liệu
     protected $guarded = [];
     // Các trường được thêm dử liệu vào trong database
-    protected $fillable = ['name', 'price','sale','category_product_id','content','images','is_hot','is_del'];
+    protected $fillable = ['name', 'price','sale','qty','category_product_id','content','images','is_hot','is_del','description'];
 
 }

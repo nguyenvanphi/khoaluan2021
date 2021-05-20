@@ -51,7 +51,7 @@
                 @endforeach
                 <div class="row" style="margin-left: 15px; margin-right: 15px; ">
                     <style>
-                        p {
+                        .detailsorder_p {
                             padding: 15px;
                             background-color: #f6f6f6;
                         }
@@ -71,7 +71,7 @@
                                 echo $item->images
                             @endphp" alt="Product" />
                             </a>
-                            <p><a href="{{URL::to('/singleproduct'.'/'.$item->id)}}" >{{$item->name_product}} ( {{$item->name_attr}}:{{$item->value}} ) x{{$item->qty}}</a> </p>
+                            <p class="detailsorder_p"><a href="{{URL::to('/singleproduct'.'/'.$item->id)}}" >{{$item->name_product}} ( {{$item->name_attr}}:{{$item->value}} ) x{{$item->qty}}</a> </p>
                         </div>
                     @endforeach
                 </div>

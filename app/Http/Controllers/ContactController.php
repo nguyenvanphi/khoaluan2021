@@ -6,6 +6,8 @@ use App\Models\Contact;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\SendMail;
+use Illuminate\Support\Facades\DB;
+use Yajra\DataTables\Facades\DataTables;
 
 class ContactController extends Controller
 {
@@ -16,6 +18,18 @@ class ContactController extends Controller
      */
     public function index()
     {
+        if(request()->ajax())
+        {
+            $data = Contact::latest()->get();
+            return DataTables::of($data)
+                    ->addColumn('action', function($data){
+                        $button = '<button type="button" class="btn btn-danger deletecontact" id="'.$data->id.'" data-toggle="modal"><i class="fa fa-trash "></i> Xoá</button>';
+                        $button .= '<a href="/shopthegmen/editcontacts/'.$data->id.'/edit" class="btn btn-info buttonedit" id="'.$data->id.'"><i class="fa fa-eye"></i> Xem</a>';
+                        return $button;
+                    })
+                    ->rawColumns(['action'])
+                    ->make(true);
+        }
         return view('backend.pages.contacts');
     }
 
@@ -57,9 +71,10 @@ class ContactController extends Controller
      * @param  \App\Contact  $contact
      * @return \Illuminate\Http\Response
      */
-    public function edit(Contact $contact)
+    public function edit($id)
     {
-        //
+        $data = Contact::findOrFail($id);
+        return view('backend.pages.editcontact',['data'=>$data]);
     }
 
     /**
@@ -69,9 +84,17 @@ class ContactController extends Controller
      * @param  \App\Contact  $contact
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Contact $contact)
+    public function update(Request $request)
     {
-        //
+        $data = Contact::findOrFail($request->id);
+        if($data->status==$request->status){
+            return response()->json(['success' => 1]);
+        }
+        $update = array(
+            'status' => $request->status,
+        );
+        Contact::whereId($request->id)->update($update);
+        return response()->json(['success' => 2]);
     }
 
     /**
@@ -80,9 +103,11 @@ class ContactController extends Controller
      * @param  \App\Contact  $contact
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Contact $contact)
+    public function destroy($id)
     {
-        //
+        $data = Contact::findOrFail($id);
+        $data->delete();
+        return response()->json(['success' => 'Delete Data successfully.']);
     }
 
     public function viewcontact(){

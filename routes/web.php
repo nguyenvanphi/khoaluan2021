@@ -74,12 +74,20 @@ Route::middleware('CheckLoginAdmin')->group(function () {
     Route::post('/addproduct', 'ProductsController@store')->name('addproduct');
     Route::get('/product/{id}/destroy','ProductsController@destroy');
     Route::get('/editproducts/{id}/edit', 'ProductsController@edit');
+    Route::post('/editproduct', 'ProductsController@update')->name('editproduct');
+    Route::get('/loadimages/{id}','ImagesproductController@index');
+    Route::post('/editimages', 'ImagesproductController@update')->name('editimages');
+    Route::get('/deleteimagesproduct/{name}', 'ImagesproductController@destroy');
 
     //orders
-    Route::get('/orders', 'OrderController@index')->name('orders');
+    Route::get('/ordersadmin', 'OrderController@indexadmin')->name('ordersadmin');
 
     // contact
     Route::get('/contacts', 'ContactController@index')->name('contacts');
+    Route::resource('contacts-data', 'ContactController');
+    Route::get('/contact/{id}/destroy','ContactController@destroy');
+    Route::get('/editcontacts/{id}/edit', 'ContactController@edit');
+    Route::post('/updatecontact', 'ContactController@update')->name('updatecontact');
 
     // info
     Route::get('/info', 'InfoController@index')->name('info');

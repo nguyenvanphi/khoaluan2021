@@ -111,6 +111,20 @@ class PaymentsController extends Controller
             $id_order = DB::table('orders')->insertGetId($data_order);
             $cart = session()->get('cart');
             foreach($cart as $item){
+                $product = Products::find($item['id']);
+                $qty_update = (int)$product['qty']-(int)$item['qty'];
+                if($qty_update>0){
+                    $update = array(
+                        'qty' => $qty_update,
+                    );
+                    Products::whereId($item['id'])->update($update);
+                }else{
+                    $update = array(
+                        'qty' => 0,
+                        'is_del' => 1,
+                    );
+                    Products::whereId($item['id'])->update($update);
+                }
                 $data_orderdetail = array();
                 $data_orderdetail = array(
                     'product_id' => $item['id'],

@@ -27,10 +27,10 @@ class HomeController extends Controller
     public function index()
     {   
         $data_sale = DB::table('products')
-                    ->where('sale','<>',null)
+                    ->where([['sale','<>',null],['is_del','<>','1']])
                     ->get();
         $data_hot = DB::table('products')
-                    ->where('is_hot','=','1')
+                    ->where([['is_hot','=','1'],['is_del','<>','1']])
                     ->get();
         return view('frontend.home',['products_sale'=>$data_sale,'products_hot'=>$data_hot]);
     }

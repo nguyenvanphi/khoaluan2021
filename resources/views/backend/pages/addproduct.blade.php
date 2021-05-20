@@ -44,19 +44,6 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="category_product" class="col-sm-3 col-form-label">Danh mục:</label>
-                                <div class="col-sm-9">
-                                    <select class="form-control" id="category_product" name="category_product">
-                                        @if (isset($categoryproducts)  && count($categoryproducts)>0)
-                                            @foreach ($categoryproducts as $key => $categoryproduct)
-                                                <option value="{{$categoryproduct->id}}">{{$categoryproduct->name}}</option>
-                                            @endforeach
-                                        @endif
-                                    </select>
-                                    <span class="help is-danger text-danger" id="error_cp"></span>
-                                </div>
-                            </div>
-                            <div class="form-group row">
                                 <label for="price" class="col-sm-3 col-form-label">Giá:</label>
                                 <div class="col-sm-9">
                                     <input type="number" class="form-control" name="price" id="price" placeholder="Nhập giá sản phẩm">
@@ -71,6 +58,27 @@
                                 </div>
                             </div>
                             <div class="form-group row">
+                                <label for="qty" class="col-sm-3 col-form-label">Số lượng:</label>
+                                <div class="col-sm-9">
+                                    <input type="number" class="form-control" name="qty" id="qty" placeholder="Nhập số lượng sản phẩm có">
+                                    <span class="help is-danger text-danger" id="error_qty"></span>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="size" class="col-sm-3 col-form-label">Size:</label>
+                                <div class="col-sm-9" style="margin-top: 7px">
+                                    <input type="checkbox" name="size[]" id="size1" value="S">
+                                    <label for="size1"> S </label>
+                                    <input type="checkbox" name="size[]" id="size2" value="M" style="margin-left: 15px">
+                                    <label for="size2"> M </label>
+                                    <input type="checkbox" name="size[]" id="size3" value="L" style="margin-left: 15px">
+                                    <label for="size3"> L </label>
+                                    <input type="checkbox" name="size[]" id="size4" value="XL" style="margin-left: 15px">
+                                    <label for="size4"> XL </label>
+                                    <br><span class="help is-danger text-danger" id="error_size"></span>
+                                </div>
+                            </div>
+                            <div class="form-group row">
                                 <label for="image" class="col-sm-3 col-form-label">Ảnh sản phẩm:</label>
                                 <div class="col-sm-9">
                                     <input type="file" class="form-control" name="image" id="image" style="padding: 1%;">
@@ -78,13 +86,16 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="del" class="col-sm-3 col-form-label">Tình trạng:</label>
+                                <label for="category_product" class="col-sm-3 col-form-label">Danh mục:</label>
                                 <div class="col-sm-9">
-                                    <select class="form-control" id="del" name="del">
-                                        <option value="0">Còn hàng</option>
-                                        <option value="1">Hết hàng</option>
+                                    <select class="form-control" id="category_product" name="category_product">
+                                        @if (isset($categoryproducts)  && count($categoryproducts)>0)
+                                            @foreach ($categoryproducts as $key => $categoryproduct)
+                                                <option value="{{$categoryproduct->id}}">{{$categoryproduct->name}}</option>
+                                            @endforeach
+                                        @endif
                                     </select>
-                                    <span class="help is-danger text-danger" id="error_del"></span>
+                                    <span class="help is-danger text-danger" id="error_cp"></span>
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -95,6 +106,16 @@
                                         <option value="1">Có</option>
                                     </select>
                                     <span class="help is-danger text-danger" id="error_hot"></span>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="del" class="col-sm-3 col-form-label">Bán ra:</label>
+                                <div class="col-sm-9">
+                                    <select class="form-control" id="del" name="del">
+                                        <option value="0">Có</option>
+                                        <option value="1">Không</option>
+                                    </select>
+                                    <span class="help is-danger text-danger" id="error_del"></span>
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -126,36 +147,19 @@
 
 @section('script')
 <script>
-	@if(Session::has('message'))
-		// var type="{{Session::get('alert-type','info')}}"
-        var type="{{Session::get('alert-type')}}"
-		switch(type){
-			case 'info':
-		         toastr.info("{{ Session::get('message') }}");
-		         break;
-	        case 'success':
-	            toastr.success("{{ Session::get('message') }}");
-	            break;
-         	case 'warning':
-	            toastr.warning("{{ Session::get('message') }}");
-	            break;
-	        case 'error':
-		        toastr.error("{{ Session::get('message') }}");
-		        break;
-		}
-	@endif
-
-</script>
-<script>
-    CKEDITOR.replace( 'content');
     $(document).ready(function(){
+        toastr.options = {
+            timeOut          : 650, //default timeout,
+        };
         $('#addproduct').on('submit',function(even){
             event.preventDefault(); 
             $('#addproduct #error_name').html('');
-            $('#addproduct #error_cp').html('');
             $('#addproduct #error_price').html('');
             $('#addproduct #error_sale').html('');
+            $('#addproduct #error_qty').html('');
+            $('#addproduct #error_size').html('');
             $('#addproduct #error_image').html('');
+            $('#addproduct #error_cp').html('');
             $('#addproduct #error_hot').html('');
             $('#addproduct #error_del').html('');
             $('#addproduct #error_content').html('');
@@ -173,17 +177,23 @@
                         if(data.errors['name']!=''){
                             $('#addproduct #error_name').html(data.errors['name']);
                         }
-                        if(data.errors['category_product']!=''){
-                            $('#addproduct #error_cp').html(data.errors['category_product']);
-                        }
                         if(data.errors['price']!=''){
                             $('#addproduct #error_price').html(data.errors['price']);
                         }
                         if(data.errors['sale']!=''){
                             $('#addproduct #error_sale').html(data.errors['sale']);
                         }
+                        if(data.errors['qty']!=''){
+                            $('#addproduct #error_qty').html(data.errors['qty']);
+                        }
+                        if(data.errors['size']!=''){
+                            $('#addproduct #error_size').html(data.errors['size']);
+                        }
                         if(data.errors['image']!=''){
                             $('#addproduct #error_image').html(data.errors['image']);
+                        }
+                        if(data.errors['category_product']!=''){
+                            $('#addproduct #error_cp').html(data.errors['category_product']);
                         }
                         if(data.errors['hot']!=''){
                             $('#addproduct #error_hot').html(data.errors['hot']);
@@ -197,6 +207,7 @@
                     }
                     if(data.success){
                         toastr.success(data.success);
+                        jQuery('#addproduct')[0].reset();
                     }
                 }
             });

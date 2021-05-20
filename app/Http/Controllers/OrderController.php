@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\NewOrder;
 use App\Models\Order;
 use App\Models\Products;
 use App\Models\Orderdetails_attribute;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 
 
 class OrderController extends Controller
@@ -45,6 +47,9 @@ class OrderController extends Controller
         return view('frontend.pages.checkout',['dataproduct'=>$cart]);
     }
 
+    public function indexadmin(){
+        return view('backend.pages.orders');
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -65,6 +70,7 @@ class OrderController extends Controller
     {
         $cart = session()->get('cart');
         if($request->pay_method==0){
+           
             $data_order = array();
             $data_order = array(
                 'user_id' => Auth::user()->id,
@@ -75,7 +81,27 @@ class OrderController extends Controller
                 'total' => $request->total,
             );
             $id_order = DB::table('orders')->insertGetId($data_order);
+            $total = 0;
             foreach($cart as $item){
+                $product = Products::find($item['id']);
+                $qty_update = (int)$product['qty']-(int)$item['qty'];
+                if($qty_update>0){
+                    $update = array(
+                        'qty' => $qty_update,
+                    );
+                    Products::whereId($item['id'])->update($update);
+                }else{
+                    $update = array(
+                        'qty' => 0,
+                        'is_del' => 1,
+                    );
+                    Products::whereId($item['id'])->update($update);
+                }
+                if($product['sale']==null){
+                    $total = $total + $product['price']*$item['qty'];
+                }else{
+                    $total = $total + $product['sale']*$item['qty'];
+                }
                 $data_orderdetail = array();
                 $data_orderdetail = array(
                     'product_id' => $item['id'],
@@ -107,6 +133,7 @@ class OrderController extends Controller
                 'email' => $request->email_order,
                 'phone' => $request->phone_order,
                 'address' => $request->address_order,
+                'total' => $total
             );
             session()->put('info_order',$info_order);
             session()->forget('cart');
@@ -182,6 +209,14 @@ class OrderController extends Controller
     public function thanks()
     {
         $info_order = session()->get('info_order');
+        $data = array(
+            'name'      =>  $info_order['name'],
+            'email'     => $info_order['email'],
+            'phone'   => $info_order['phone'],
+            'address'   =>   $info_order['address'],
+            'total' => $info_order['total']
+        );
+        Mail::to('17T1021197@husc.edu.vn')->send(new NewOrder($data));
         session()->forget('info_order');
         $order = array();
         foreach(session('order') as $item){
