@@ -1,6 +1,10 @@
 @extends('backend.layout.admin')
 @section('content')
-
+<style>
+    .table td, .table th{
+        vertical-align: unset;
+    }
+</style>
 <div class="breadcrumbs">
     {{-- <div class="col-sm-4">
         <div class="page-header float-left">
@@ -245,7 +249,7 @@
                 </button>
                 </div>
                 <div class="modal-body">
-                Bạn có chắc muốn xoá sản ảnh này ?
+                Bạn có chắc muốn xoá ảnh này ?
                 </div>
                 <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Huỷ</button>

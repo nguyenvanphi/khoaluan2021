@@ -14,7 +14,6 @@
 Route User
 */
 
-
 Route::get('/','HomeController@index');
 Route::get('/about','PageController@about');
 Route::get('/shop','ShopController@index');
@@ -81,6 +80,12 @@ Route::middleware('CheckLoginAdmin')->group(function () {
 
     //orders
     Route::get('/ordersadmin', 'OrderController@indexadmin')->name('ordersadmin');
+    Route::get('/orders/{id}/destroy','OrderController@destroy');
+    Route::get('/editorder/{id}/edit', 'OrderController@edit');
+    Route::get('/loadorder/{id}', 'OrderController@loadorder');
+    Route::post('/addproductorder', 'OrderController@addproductorder')->name('addproductorder');
+    Route::get('/deleteproductorder/{id}','OrderdetailController@destroy');
+    Route::post('/updateorderdetails', 'OrderdetailController@update')->name('updateorderdetails');
 
     // contact
     Route::get('/contacts', 'ContactController@index')->name('contacts');

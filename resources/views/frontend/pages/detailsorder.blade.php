@@ -10,42 +10,42 @@
                 @foreach ($order as $item)
                     <div class="card-body form-inline">
                         <div class="form-group col-xl-6" style="margin-bottom: 15px;">
-                            <label >Mã đơn hàng: </label>
-                            <input type="text" value="{{$item->id}}" disabled class="form-control" style="flex-grow: 2; margin-left: 15px;">
+                            <label class="col-xl-5">Mã đơn hàng: </label>
+                            <input type="text" value="{{$item->id}}" disabled class="form-control col-xl-7" >
                         </div>
                         <div class="form-group col-xl-6" style="margin-bottom: 15px;">
-                            <label >Người đặt hàng: </label>
-                            <input type="text" value="{{$item->full_name}}" disabled class="form-control" style="flex-grow: 2; margin-left: 15px;">
+                            <label class="col-xl-5">Người đặt hàng: </label>
+                            <input type="text" value="{{$item->full_name}}" disabled class="form-control col-xl-7" >
                         </div>
                         <div class="form-group col-xl-6" style="margin-bottom: 15px;">
-                            <label >Tổng tiền: </label>
-                            <input type="text" value="{{$item->total}}" disabled class="form-control" style="flex-grow: 2; margin-left: 15px;">
+                            <label class="col-xl-5">Tổng tiền: </label>
+                            <input type="text" value="{{$item->total}}" disabled class="form-control col-xl-7" >
                         </div>
                         <div class="form-group col-xl-6" style="margin-bottom: 15px;">
-                            <label >Địa chỉ email: </label> 
-                            <input type="text" value="{{$item->email}}" disabled class="form-control" style="flex-grow: 2; margin-left: 15px;">
+                            <label class="col-xl-5">Địa chỉ email: </label> 
+                            <input type="text" value="{{$item->email}}" disabled class="form-control col-xl-7" >
                         </div>
                         <div class="form-group col-xl-6" style="margin-bottom: 15px;">
-                            <label >Thanh toán: </label>
+                            <label class="col-xl-5">Thanh toán: </label>
                             <input type="text" value="@php
                                     if($item->is_pay){
                                         echo 'Đã thanh toán';
                                     }else{
                                         echo 'Chưa thanh toán';
                                     } 
-                                @endphp" disabled class="form-control" style="flex-grow: 2; margin-left: 15px;">
+                                @endphp" disabled class="form-control col-xl-7" >
                         </div>
                         <div class="form-group col-xl-6" style="margin-bottom: 15px;">
-                            <label >Địa chỉ nhận hàng: </label>
-                            <input type="text" value="{{$item->address}}" disabled class="form-control" style="flex-grow: 2; margin-left: 15px;">
+                            <label class="col-xl-5">Địa chỉ nhận hàng: </label>
+                            <input type="text" value="{{$item->address}}" disabled class="form-control col-xl-7" >
                         </div>
                         <div class="form-group col-xl-6" style="margin-bottom: 15px;">
-                            <label >Trạng thái đơn hàng: </label>
-                            <input type="text" value="{{$item->name}}" disabled class="form-control" style="flex-grow: 2; margin-left: 15px;">
+                            <label class="col-xl-5">Trạng thái đơn hàng: </label>
+                            <input type="text" value="{{$item->name}}" disabled class="form-control col-xl-7" >
                         </div>
                         <div class="form-group col-xl-6" style="margin-bottom: 15px;">
-                            <label >Số điện thoại: </label>
-                            <input type="text" value="{{$item->phone}}" disabled class="form-control" style="flex-grow: 2; margin-left: 15px;">
+                            <label class="col-xl-5">Số điện thoại: </label>
+                            <input type="text" value="{{$item->phone}}" disabled class="form-control col-xl-7" >
                         </div>
                     </div>
                 @endforeach

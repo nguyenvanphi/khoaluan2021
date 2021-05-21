@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Storage;
 
 class ImagesproductController extends Controller
 {
@@ -113,6 +114,7 @@ class ImagesproductController extends Controller
     public function destroy($name)
     {
         DB::table('imagesproducts')->where('images', '=', $name)->delete();
+        Storage::delete('public/products/'.$name);
         return response()->json(['success' => 'Delete successfully.']);
     }
     
