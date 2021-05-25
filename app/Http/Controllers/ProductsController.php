@@ -237,8 +237,8 @@ class ProductsController extends Controller
         DB::table('imagesproducts')->where('product_id', '=', $id)->delete();
         $data = Products::findOrFail($id);
         $delete_file = Storage::delete('public/products/'.$data->images);
-        $data->delete();
         DB::table('attributevalues')->where('product_id', '=', $id)->delete();
+        $data->delete();
         return response()->json(['success' => 'Delete Data successfully.']);
     }
 }

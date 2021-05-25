@@ -107,14 +107,27 @@ class OrderdetailController extends Controller
                 $total = $total + (int)$product->price*(int)$request->$qty;
             }
         }
-        $update_order = array(
-            'is_pay' => $request->pay_orderdetails,
-            'full_name'=> $request->name_orderdetails,
-            'email'=> $request->email_orderdetails,
-            'address'=> $request->address_orderdetails,
-            'total' => $total,
-            'status_order_id'=> $request->status_orderdetails
-        );
+        $update_order = array();
+        if($request->status_orderdetails==3){
+            $update_order = array(
+                'is_pay' => 1,
+                'full_name'=> $request->name_orderdetails,
+                'email'=> $request->email_orderdetails,
+                'address'=> $request->address_orderdetails,
+                'total' => $total,
+                'status_order_id'=> $request->status_orderdetails
+            );
+        }else{
+            $update_order = array(
+                'is_pay' => $request->pay_orderdetails,
+                'full_name'=> $request->name_orderdetails,
+                'email'=> $request->email_orderdetails,
+                'address'=> $request->address_orderdetails,
+                'total' => $total,
+                'status_order_id'=> $request->status_orderdetails
+            );
+        }
+        
         Order::whereId($request->id_orderdetails)->update($update_order);
 
         return response()->json(['success' => 'Data Update Successfully.']);

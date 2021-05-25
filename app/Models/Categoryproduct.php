@@ -16,5 +16,9 @@ class Categoryproduct extends Model
     public function getdata(){
         return Categoryproduct::all();
     }
+
+    public function producta(){
+        return $this->hasMany('App\Models\Products','category_product_id');
+    }
     
 }

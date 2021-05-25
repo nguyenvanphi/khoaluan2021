@@ -76,7 +76,7 @@ class UserController extends Controller
         $rules = array(
             'id'        =>  'required',
             'name' =>  'required',
-            'email'        =>  'required|email|unique:users',
+            'email'        =>  'required|email|unique:users,email,'.$request->id,
             'phone' => 'required|numeric|min:10|max:11',
             'address' => 'required|string'
         );

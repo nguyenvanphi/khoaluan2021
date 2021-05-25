@@ -103,12 +103,13 @@
 
                         </style>
                         
-                        
-                        @if (Auth::user()->role_id==1)
-                            <a href="{{URL::to('/dashboard')}}" style="color: dimgrey; margin-right: 20px;">
-                                <i class="fa fa-dashboard" style="font-size: 25px;"></i>
-                            </a>
-                        @endif
+                        <?php if(Auth::check()){?>
+                            @if (Auth::user()->role_id==1)
+                                <a href="{{URL::to('/dashboard')}}" style="color: dimgrey; margin-right: 20px;">
+                                    <i class="fa fa-dashboard" style="font-size: 25px;"></i>
+                                </a>
+                            @endif
+                        <?php }?>
                         <?php if(Auth::check()){?>
                             <div class="dropdown">
                                 <a href="{{URL::to('/profile')}}" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
